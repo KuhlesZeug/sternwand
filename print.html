@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Druck</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1">
+<style>
+@page{size:A4;margin:0}
+html,body{background:#fff;color:#20180f;margin:0}
+#snow{display:none}
+.pg{width:210mm;height:297mm;padding:16mm 15mm;box-sizing:border-box;position:relative;page-break-after:always;background:#f6efdf;background-image:radial-gradient(circle at 15% 8%,rgba(255,255,255,.6),transparent 40%),radial-gradient(circle at 90% 95%,rgba(120,90,40,.12),transparent 50%);overflow:hidden}
+.pg-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5px solid #2a1d10;padding-bottom:4mm;margin-bottom:7mm;font-family:'Special Elite',monospace;font-size:10pt;letter-spacing:.12em;text-transform:uppercase;color:#5a4a33}
+.pg-top b{font-family:'Playfair Display',serif;font-size:15pt;letter-spacing:0;text-transform:none;color:#20180f}
+.pg-foot{position:absolute;left:15mm;right:15mm;bottom:9mm;font-size:8pt;color:#7a6a50;display:flex;justify-content:space-between}
+.pg .dt{font-size:11pt}.pg .tw .dt{min-width:0}
+.pg .dtl{font-size:24pt}
+.pg .idcard{max-width:120mm;margin:6mm 0}
+.pg .tafel{grid-template-columns:repeat(2,1fr);gap:6mm}
+.pg .tf img{width:28mm;height:35mm}
+.pg .tf-l{font-size:8pt}.pg .tf-l i{height:7mm}
+.cutline{border:1.5px dashed #7a6a50;border-radius:4mm;padding:4mm;display:inline-block}
+</style></head><body>
+<div id="out"></div>
+<script src="docs.js?v=1"></script>
+<script>
+const p=new URLSearchParams(location.search),R=(p.get('r')||'A').toUpperCase();
+const T=R==='A'?'Tatortmappe · Ermittlung vor Ort':'Fallakte Wendt · Präsidium im Tal';
+const L=Object.entries(DOCS).filter(([k,d])=>d.role===R).sort((a,b)=>a[1].day-b[1].day);
+document.getElementById('out').innerHTML=L.map(([k,d],i)=>'<section class="pg"><div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>'+d.title+'</b></div>'+(k==='ausweis'?'<div class="cutline">'+d.html('')+'</div><p class="dn">Ausschneiden und bereithalten. Trag deinen Namen ein und klebe ein Foto auf, wenn du magst.</p>':d.html(''))+'<div class="pg-foot"><span>© KuhlesZeug · nur für den privaten Gebrauch · frei erfundene Geschichte</span><span>Rolle '+R+' · Seite '+(i+1)+'</span></div></section>').join('');
+</script>
+</body></html>

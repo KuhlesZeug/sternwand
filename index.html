@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Zimmer 24 · Mord im Berghotel Sternwand</title>
+<meta name="theme-color" content="#0b141c">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+<canvas id="snow"></canvas>
+
+<section id="s-start" class="screen on">
+  <div class="start-bg"></div>
+  <div class="start-in">
+    <div class="kick">Ein Krimi Adventskalender für zwei</div>
+    <h1>Zimmer 24</h1>
+    <div class="sub">Mord im Berghotel Sternwand</div>
+    <div class="role-badge" id="role-badge"></div>
+    <p id="giftline" class="giftline"></p>
+    <div id="codebox" class="codebox">
+      <p>Gib den Zugangscode aus deinem PDF ein.</p>
+      <input id="code" autocomplete="off" autocapitalize="characters" placeholder="Zugangscode">
+    </div>
+    <button id="btn-start" class="btn big">Ermittlung beginnen</button>
+    <p class="small">Mit Ton spielen. Mit Kopfhörern wird es noch dichter.</p>
+  </div>
+</section>
+
+<section id="s-desk" class="screen">
+  <header class="top">
+    <div><div class="kick" id="desk-kick"></div><div class="title">Berghotel Sternwand</div></div>
+    <div class="topbtns"><button id="btn-akte" class="icon" title="Akte"></button><button id="btn-sound" class="icon" title="Ton"></button></div>
+  </header>
+  <div class="corridor">
+    <p class="lead" id="desk-lead"></p>
+    <div class="doors" id="doors"></div>
+  </div>
+  <p class="foot" id="deskfoot"></p>
+</section>
+
+<section id="s-day" class="screen">
+  <header class="top">
+    <button class="icon back" id="btn-back" title="Zurück"></button>
+    <div class="ttl"><div class="kick" id="day-kick"></div><div class="title" id="day-title"></div></div>
+    <div class="topbtns"><button id="btn-akte2" class="icon" title="Akte"></button></div>
+  </header>
+  <div class="day-in">
+    <div class="scene" id="scene"></div>
+    <div class="mods" id="mods"></div>
+    <div class="codecard" id="codecard">
+      <div class="cc-head"><span>Tagescode</span><span class="cc-note">Findet ihn nur gemeinsam</span></div>
+      <div class="cc-row"><input id="daycode" autocomplete="off" autocapitalize="characters" placeholder="Code"><button class="btn" id="btn-check">Prüfen</button></div>
+      <div class="hints" id="hints"></div>
+    </div>
+    <div class="reveal" id="reveal"></div>
+  </div>
+</section>
+
+<section id="s-akte" class="screen">
+  <header class="top">
+    <button class="icon back" id="btn-akte-back" title="Zurück"></button>
+    <div class="ttl"><div class="kick" id="akte-kick"></div><div class="title" id="akte-title"></div></div>
+    <div class="topbtns"></div>
+  </header>
+  <div class="akte-tabs" id="akte-tabs"></div>
+  <div class="akte-page" id="akte-page"></div>
+</section>
+
+<div id="viewer" class="viewer" aria-hidden="true">
+  <div class="v-box"><button class="icon v-close" id="v-close" title="Schließen"></button><div id="v-body"></div></div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script src="gate.js?v=1"></script>
+<script src="icons.js?v=1"></script>
+<script src="docs.js?v=1"></script>
+<script src="data.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
