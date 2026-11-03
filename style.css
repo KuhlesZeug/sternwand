@@ -312,3 +312,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .wc.sel{outline:3px solid #b3141b}
 .wn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff59a;padding:12px;width:220px;box-shadow:0 10px 24px rgba(0,0,0,.5);z-index:5;color:#222;display:flex;flex-direction:column;gap:8px}
 .wn textarea{min-height:70px;border:0;background:transparent;font-family:'Special Elite',monospace;font-size:14px;resize:none;outline:none}
+.film .fs.cut{transition:none}
+.film .flash{position:absolute;inset:0;background:#dfe9ff;opacity:0;pointer-events:none;z-index:2}
+.film .flash.go{animation:flash 1.1s ease-out}
+@keyframes flash{0%{opacity:0}6%{opacity:.85}12%{opacity:.1}20%{opacity:.7}100%{opacity:0}}
+.film .fs.flick.on img{animation:kb var(--dur,9s) linear forwards,flick 2.4s steps(1) infinite}
+@keyframes flick{0%{filter:brightness(1)}8%{filter:brightness(.45)}10%{filter:brightness(1.05)}48%{filter:brightness(1)}50%{filter:brightness(.6)}53%{filter:brightness(1)}}

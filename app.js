@@ -64,19 +64,24 @@ $('#btn-name').onclick=()=>{ac();const a=$('#nm-me').value.trim(),b=$('#nm-pa').
 // Intro Film
 let film=null;
 function goIntro(){const I=INTRO[ROLE],f=$('#film');f.innerHTML='';stopAudio();
- I.slides.forEach((x,i)=>{const d=el('div','fs'+(x.title?' ft':''));if(x.img){const im=el('img');im.src=x.img;im.alt='';const k=x.k||[1.04,1.16,'0,0','0,0'];const [x0,y0]=k[2].split(','),[x1,y1]=k[3].split(',');const nx=I.slides[i+1];const dur=((nx?nx.t:x.t+8)-x.t)+1.6;
-  d.style.cssText='--s0:'+k[0]+';--s1:'+k[1]+';--x0:'+x0+';--y0:'+y0+';--x1:'+x1+';--y1:'+y1+';--dur:'+dur+'s';d.appendChild(im)}else d.innerHTML='<div class="ft-in">'+T(x.s)+'</div>';f.appendChild(d)});
- $('#film-sub').classList.remove('on');$('#film-prog').style.width='0';$('#btn-film').classList.remove('off');show('#s-intro');$('#snow').style.display='block'}
+ I.slides.forEach((x,i)=>{const d=el('div','fs'+(x.title?' ft':'')+(x.fx==='cut'?' cut':''));const nx=I.slides[i+1];const dur=((nx?nx.t:I.end)-x.t)+1.4;
+  if(x.img){const im=el('img');im.src=x.img;im.alt='';im.loading='eager';const k=x.k||[1.04,1.16,'0,0','0,0'];const [x0,y0]=k[2].split(','),[x1,y1]=k[3].split(',');
+   d.style.cssText='--s0:'+k[0]+';--s1:'+k[1]+';--x0:'+x0+';--y0:'+y0+';--x1:'+x1+';--y1:'+y1+';--dur:'+dur+'s';d.appendChild(im);if(x.fx==='flicker')d.classList.add('flick')}else d.innerHTML='<div class="ft-in">'+T(x.s)+'</div>';f.appendChild(d)});
+ f.appendChild(el('div','flash'));
+ $('#film-sub').classList.remove('on');$('#film-prog').style.width='0';$('#btn-film').classList.remove('off');show('#s-intro');$('#snow').style.display='none'}
 $('#btn-film').onclick=()=>{ac();$('#btn-film').classList.add('off');playFilm()};
-function playFilm(){const I=INTRO[ROLE],sl=[...$('#film').children],sub=$('#film-sub');let cur=-1;
+function playFilm(){const I=INTRO[ROLE],sl=[...$('#film').querySelectorAll('.fs')],sub=$('#film-sub'),fl=$('#film .flash');let cur=-1,lastSub='';
  const au=new Audio(I.vo);curAudio=au;AMBI.scape('storm');AMBI.music(true,.4);AMBI.duck(true);au.onended=()=>AMBI.duck(false);let t0=performance.now(),useAu=false;
- const end=I.slides[I.slides.length-1].t+7;
  au.play().then(()=>{useAu=true}).catch(()=>{});
  function tick(){if(film!==tick)return;const t=useAu&&!au.error?au.currentTime:(performance.now()-t0)/1000;
   let k=0;I.slides.forEach((x,i)=>{if(t>=x.t)k=i});
-  if(k!==cur){sl.forEach((e,i)=>e.classList.toggle('on',i===k));const x=I.slides[k];sub.classList.remove('on');if(!x.title)setTimeout(()=>{sub.innerHTML=T(x.s);sub.classList.add('on')},250);cur=k}
-  $('#film-prog').style.width=Math.min(100,t/end*100)+'%';
-  if(t>=end||(useAu&&au.ended&&t>=I.slides[I.slides.length-1].t+4)){filmDone();return}requestAnimationFrame(tick)}
+  if(k!==cur){const x=I.slides[k];sl.forEach((e,i)=>{if(i===k){e.classList.remove('on');void e.offsetWidth;e.classList.add('on')}else e.classList.remove('on')});
+   if(x.fx==='flash'){fl.classList.remove('go');void fl.offsetWidth;fl.classList.add('go')}
+   if(x.sfx&&AMBI.sfx[x.sfx])setTimeout(()=>AMBI.sfx[x.sfx](),(x.sfxAt||0)*1000);
+   if(x.title){sub.classList.remove('on')}else if(x.s!==lastSub){sub.classList.remove('on');lastSub=x.s;setTimeout(()=>{sub.innerHTML=T(x.s);sub.classList.add('on')},x.fx==='cut'?60:220)}
+   cur=k}
+  $('#film-prog').style.width=Math.min(100,t/I.end*100)+'%';
+  if(t>=I.end){filmDone();return}requestAnimationFrame(tick)}
  film=tick;requestAnimationFrame(tick)}
 function filmDone(){film=null;stopAudio();AMBI.duck(false);st.intro=1;save();next()}
 $('#btn-skip').onclick=()=>{ac();filmDone()};

@@ -61,6 +61,12 @@ A.sfx={
  boot(){blip(220,.15,'square',.03);blip(440,.2,'square',.03,.15);burst(1.2,300,.6,.03,.1,'pink','lowpass')},
  paperSlide(){burst(.35,2600,.8,.06,0,'pink','highpass')},
  lock(){burst(.04,1200,3,.1);burst(.06,500,2,.08,.05)},
+ engine(){const t=C.currentTime,o=C.createOscillator(),g=C.createGain(),lp=C.createBiquadFilter();o.type='sawtooth';o.frequency.setValueAtTime(48,t);o.frequency.linearRampToValueAtTime(56,t+3.5);lp.type='lowpass';lp.frequency.value=220;o.connect(lp);lp.connect(g);g.connect(out);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.06,t+.6);g.gain.exponentialRampToValueAtTime(.0001,t+4);o.start(t);o.stop(t+4.2);burst(3.6,700,.7,.03,0,'pink','lowpass');[1.2,2.6].forEach(d=>burst(.45,1800,.8,.05,d,'pink','bandpass'))},
+ thunder(){burst(.08,3000,.6,.25,0,'white','highpass');burst(3.2,90,.6,.5,.15,'brown','lowpass');burst(2.2,300,.5,.18,.4,'brown','lowpass')},
+ gust(){const t=C.currentTime,s=C.createBufferSource();s.buffer=nbuf(3,'pink');const f=C.createBiquadFilter();f.type='bandpass';f.Q.value=1.2;f.frequency.setValueAtTime(300,t);f.frequency.linearRampToValueAtTime(1400,t+1.2);f.frequency.linearRampToValueAtTime(400,t+2.8);const g=C.createGain();s.connect(f);f.connect(g);g.connect(out);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.12,t+1);g.gain.exponentialRampToValueAtTime(.0001,t+2.9);s.start(t);s.stop(t+3)},
+ fire(){for(let i=0;i<10;i++)burst(.04,2000+Math.random()*2500,2,.06,i*.15+Math.random()*.1)},
+ bell(){[1568,2349,3136].forEach((f,i)=>blip(f,1.4-i*.3,'sine',.08/(i+1)))},
+ tick(){for(let i=0;i<3;i++)burst(.02,i%2?3200:2600,6,.06,i*.9)},
  creak(){const t=C.currentTime,o=C.createOscillator(),g=C.createGain(),fl=C.createBiquadFilter();o.type='sawtooth';o.frequency.setValueAtTime(110,t);o.frequency.linearRampToValueAtTime(160,t+.6);fl.type='bandpass';fl.frequency.value=700;fl.Q.value=6;o.connect(fl);fl.connect(g);g.connect(out);env(g,t,.1,.03,.6);o.start(t);o.stop(t+.8)}
 };
 let duckLvl=1,baseLvl=.5;const _m=A.music;A.music=function(on,l){if(l!=null)baseLvl=l;return _m(on,l!=null?l*duckLvl:l)};A.duck=function(on){duckLvl=on?.35:1;if(mus&&C)mus.g.gain.setTargetAtTime(baseLvl*duckLvl,C.currentTime,.3);if(cur&&C)cur.g.gain.setTargetAtTime(on?.9:1.8,C.currentTime,.3)};
