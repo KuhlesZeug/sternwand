@@ -1,7 +1,9 @@
 // Inhalte: 24 Türen, je Rolle A (vor Ort) und B (Präsidium)
-window.ROOMS=['Rezeption','Zimmer 2','Küche','Zimmer 7','Technik','Zimmer 12','Hotelbar','Zimmer 15','Spa','Zimmer 23','Kameras','Flur','Telefon','Zimmer 18','Tatort','Garten','Zimmer 3','Büro','Kapelle','4. Stock','Notizbuch','Verhör','Verhör','Suite 24'];
+window.ROOMS=['Rezeption','Zimmer 2','Küche','Zimmer 7','Technik','Zimmer 12','Hotelbar','Zimmer 15','Spa','Zimmer 23','Kameraraum','Flur','Zentrale','Zimmer 18','Suite 24','Gewächshaus','Zimmer 3','Büro','Kapelle','Suite 24','Bibliothek','Verhörraum','Verhörraum','Suite 24'];
 
-window.ROOMS_B=['Büro K1','IT Raum','Faxraum','Register','Hausmeister','Medienraum','Kantine','Archiv','Besprechung','Standesamt','Videoraum','Asservate','Zentrale','Bank','Bereitschaft','Labor','Keller','Spurenlabor','Personalakten','Funkraum','Pressestelle','Beobachtung','Verhörraum','Lagezentrum'];
+window.ROOMS_B=['Büro K1','Büro K1','Faxraum','Büro K1','Archiv','Büro K1','Büro K1','Pressestelle','Faxraum','Register','Videoraum','Faxraum','Büro K1','Asservate','Bereitschaft','Labor','Archiv','Spurenlabor','Besprechung','Labor','Pressestelle','Beobachtung','Beobachtung','Lagezentrum'];
+// Türbild je Tag: gleicher Raum, gleiche Tür
+window.DOORS={A:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,24,16,17,18,19,24,21,22,22,24],B:[1,1,3,1,8,1,1,21,3,4,11,3,1,12,15,16,8,18,9,16,21,22,22,24]};
 window.DAYS={
 1:{hintVo:{A:['a/h1a1.mp3?v=5','a/h1a2.mp3?v=5'],B:['a/h1b1.mp3?v=5','a/h1b2.mp3?v=5']},room:'Rezeption',roomB:'Büro K1',code:'9d8c72a4ae58c82c5b7a5ad571e8be21f5632d10f204a4648e7e8662d12c3a27',
  A:{vo:'a/vo_d1a.mp3?v=4',scene:'In der Nacht zum ersten Dezember hat der Sturm das Berghotel Sternwand eingeschlossen. Die Straße ist verschüttet, die Seilbahn steht still. Um zehn nach sieben hallt ein Schrei durch das Haus. Oben in Suite 24 liegt Konrad Wendt, der Hotelier. Tot. Eigentlich bist du hier im Urlaub. Jetzt bist du die einzige Polizei auf diesem Berg, und das Präsidium im Tal erreichst du nur am Telefon. Fang an der Rezeption an. Wer war heute Nacht im Haus?',

@@ -63,7 +63,7 @@ $('#btn-name').onclick=()=>{ac();const a=$('#nm-me').value.trim(),b=$('#nm-pa').
 
 // Intro Film
 let film=null;
-function goIntro(){const I=INTRO[ROLE],f=$('#film');f.innerHTML='';stopAudio();
+function goIntro(){const I=INTRO[ROLE],f=$('#film');f.innerHTML='';stopAudio();$('#film-end').classList.remove('on');$('#btn-skip').classList.remove('off');
  I.slides.forEach((x,i)=>{const d=el('div','fs'+(x.title?' ft':'')+(x.fx==='cut'?' cut':''));const nx=I.slides[i+1];const dur=((nx?nx.t:I.end)-x.t)+1.4;
   if(x.img){const im=el('img');im.src=x.img;im.alt='';im.loading='eager';const k=x.k||[1.04,1.16,'0,0','0,0'];const [x0,y0]=k[2].split(','),[x1,y1]=k[3].split(',');
    d.style.cssText='--s0:'+k[0]+';--s1:'+k[1]+';--x0:'+x0+';--y0:'+y0+';--x1:'+x1+';--y1:'+y1+';--dur:'+dur+'s';d.appendChild(im);if(x.fx==='flicker')d.classList.add('flick')}else d.innerHTML='<div class="ft-in">'+T(x.s)+'</div>';f.appendChild(d)});
@@ -71,19 +71,21 @@ function goIntro(){const I=INTRO[ROLE],f=$('#film');f.innerHTML='';stopAudio();
  $('#film-sub').classList.remove('on');$('#film-prog').style.width='0';$('#btn-film').classList.remove('off');show('#s-intro');$('#snow').style.display='none'}
 $('#btn-film').onclick=()=>{ac();$('#btn-film').classList.add('off');playFilm()};
 function playFilm(){const I=INTRO[ROLE],sl=[...$('#film').querySelectorAll('.fs')],sub=$('#film-sub'),fl=$('#film .flash');let cur=-1,lastSub='';
- const au=new Audio(I.vo);curAudio=au;AMBI.scape('storm');AMBI.music(true,.4);AMBI.duck(true);au.onended=()=>AMBI.duck(false);let t0=performance.now(),useAu=false;
+ const au=new Audio(I.vo);curAudio=au;AMBI.scape('storm');AMBI.music(true,.4);AMBI.duck(true);au.onended=()=>{AMBI.duck(false);if(useAu){t0=performance.now()-(au.duration||au.currentTime)*1000;useAu=false}};let t0=performance.now(),useAu=false;
  au.play().then(()=>{useAu=true}).catch(()=>{});
  function tick(){if(film!==tick)return;const t=useAu&&!au.error?au.currentTime:(performance.now()-t0)/1000;
   let k=0;I.slides.forEach((x,i)=>{if(t>=x.t)k=i});
-  if(k!==cur){const x=I.slides[k];sl.forEach((e,i)=>{if(i===k){e.classList.remove('on');void e.offsetWidth;e.classList.add('on')}else e.classList.remove('on')});
+  if(k!==cur){const x=I.slides[k];sl.forEach((e,i)=>{if(i===k){e.classList.remove('on','was');void e.offsetWidth;e.classList.add('on')}else if(e.classList.contains('on')){e.classList.add('was');e.classList.remove('on');clearTimeout(e._w);e._w=setTimeout(()=>e.classList.remove('was'),1800)}});
    if(x.fx==='flash'){fl.classList.remove('go');void fl.offsetWidth;fl.classList.add('go')}
    if(x.sfx&&AMBI.sfx[x.sfx])setTimeout(()=>AMBI.sfx[x.sfx](),(x.sfxAt||0)*1000);
    if(x.title){sub.classList.remove('on')}else if(x.s!==lastSub){sub.classList.remove('on');lastSub=x.s;setTimeout(()=>{sub.innerHTML=T(x.s);sub.classList.add('on')},x.fx==='cut'?60:220)}
    cur=k}
   $('#film-prog').style.width=Math.min(100,t/I.end*100)+'%';
-  if(t>=I.end){filmDone();return}requestAnimationFrame(tick)}
+  if(t>=I.end){filmEnd();return}requestAnimationFrame(tick)}
  film=tick;requestAnimationFrame(tick)}
-function filmDone(){film=null;stopAudio();AMBI.duck(false);st.intro=1;save();next()}
+function filmEnd(){film=null;AMBI.duck(false);$('#film-prog').style.width='100%';$('#btn-skip').classList.add('off');$('#film-sub').classList.remove('on');$('#film-end-t').textContent=ROLE==='B'?'Das Präsidium wartet auf dich.':'Das Berghotel wartet auf dich.';$('#film-end').classList.add('on')}
+$('#btn-film-go').onclick=()=>{ac();SFX.door&&SFX.door();filmDone()};
+function filmDone(){film=null;$('#film-end').classList.remove('on');$('#btn-skip').classList.remove('off');stopAudio();AMBI.duck(false);st.intro=1;save();next()}
 $('#btn-skip').onclick=()=>{ac();filmDone()};
 
 // Bastelkarte
@@ -104,7 +106,7 @@ function newTrail(d){const D=DAYS[d];if(!D)return false;return ['A','B'].include
 function renderDesk(){$('#desk-kick').textContent=RN[ROLE];const g=$('#doors');g.innerHTML='';let n=0;
  for(let d=1;d<=24;d++){const has=!!DAYS[d],open=unlocked(d),done=!!st.solved[d];if(done)n++;
   const RL=ROLE==='B'?ROOMS_B:ROOMS;
-  const b=el('button','door'+(done?' done':'')+(!open||!has?' shut':''),'<span class="dimg" style="background-image:url(a/door_'+(ROLE==='B'?'b':'a')+String(d).padStart(2,'0')+'.jpg?v=5)"></span><span class="dn">'+d+'</span><span class="dr">'+(RL[d-1]||'')+'</span>'+(newTrail(d)?'<span class="dnew">Neue Spur</span>':'')+(done?'<span class="dok">'+KI.check+'</span>':(!open||!has?'<span class="dlk">'+KI.lock+'</span>':'')));
+  const b=el('button','door'+(done?' done':'')+(!open||!has?' shut':''),'<span class="dimg" style="background-image:url(a/door_'+(ROLE==='B'?'b':'a')+String((DOORS[ROLE==='B'?'B':'A']||[])[d-1]||d).padStart(2,'0')+'.jpg?v=5)"></span><span class="dn">'+d+'</span><span class="dr">'+(RL[d-1]||'')+'</span>'+(newTrail(d)?'<span class="dnew">Neue Spur</span>':'')+(done?'<span class="dok">'+KI.check+'</span>':(!open||!has?'<span class="dlk">'+KI.lock+'</span>':'')));
   b.onclick=()=>{ac();if(!has){toast(open?'Diese Tür ist noch in Arbeit.':'Diese Tür öffnet sich am '+d+'. Dezember.');return}if(!open){toast('Diese Tür öffnet sich am '+d+'. Dezember.');return}SFX.door();openDay(d)};g.appendChild(b)}
  $('#desk-lead').textContent=n?'Gelöst: '+n+' von 24 Türen. Was heute geschieht, löst ihr nur gemeinsam.':'Jeden Tag öffnet sich eine Tür. Ihr seht beide nur eure Hälfte. Redet miteinander.';
  $('#deskfoot').innerHTML=(PROBE?'Testmodus: alle vorhandenen Türen offen':'Verpasste Tage lassen sich jederzeit nachholen.')+'<br><button class="btn ghost sm desk-film" id="btn-kit">Unterlagen und Intro</button>';$('#btn-kit').onclick=()=>{ac();SFX.paper();goKit()}}
@@ -112,7 +114,7 @@ function renderDesk(){$('#desk-kick').textContent=RN[ROLE];const g=$('#doors');g
 // Tag
 let curDay=0;
 function openDay(d){curDay=d;const D=DAYS[d],R=D[ROLE];stopAudio();show('#s-day');
- $('#day-kick').textContent='Tür '+d+' · '+RN[ROLE];$('#day-title').textContent=ROLE==='B'&&D.roomB?D.roomB:D.room;
+ $('#day-kick').textContent='Tür '+d+' · '+RN[ROLE];$('#day-title').textContent=(ROLE==='B'?ROOMS_B:ROOMS)[d-1]||(ROLE==='B'&&D.roomB?D.roomB:D.room);
  const sc=$('#scene');sc.innerHTML='';const vo=el('button','vo','<span class="vo-ic">'+KI.play+'</span><span>Szene anhören</span>');sc.appendChild(vo);const p=el('p','scene-t',T(R.scene));sc.appendChild(p);sc.appendChild(el('div','partner',(ROLE==='A'?'Im Präsidium am Telefon: ':'Oben im Hotel: ')+'<b>'+T('{P}')+'</b>'));
  bindVoice(vo,R.vo);if(st.sound)setTimeout(()=>vo.click(),400);
  const m=$('#mods');m.innerHTML='';R.mods.forEach(x=>m.appendChild(MODS[x.t](x)));
