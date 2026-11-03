@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kripo Datenbank Hochtal</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e1a22;--pan:#15242f;--line:#27404f;--acc:#6fb3c8;--txt:#d8e3ea;--mut:#8aa0ae;--warn:#d9a441}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:16px}
+header{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);background:#0b151c}
+.logo{width:34px;height:34px;border:2px solid var(--acc);border-radius:8px;display:grid;place-items:center;font-family:'IBM Plex Mono';font-weight:600;color:var(--acc)}
+.hn{font-weight:600}.hs{font-size:12px;color:var(--mut);font-family:'IBM Plex Mono'}
+main{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+.box{background:var(--pan);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:16px}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 6px;font-family:'IBM Plex Mono'}
+input{width:100%;background:#0b151c;border:1px solid var(--line);border-radius:6px;color:var(--txt);padding:11px;font-family:'IBM Plex Mono';font-size:16px;text-transform:uppercase;outline:none}
+button{background:var(--acc);color:#06222c;border:0;border-radius:6px;padding:11px 18px;font-weight:600;margin-top:14px;cursor:pointer;font-size:15px}
+.err{color:#e57373;font-size:14px;margin-top:10px;min-height:18px;font-family:'IBM Plex Mono'}
+.fine{font-size:12px;color:var(--mut);margin-top:14px}
+h2{font-size:18px;margin:0 0 10px}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;font-size:15px}.kv div:nth-child(odd){color:var(--mut);font-family:'IBM Plex Mono';font-size:13px}
+.ass{display:flex;gap:14px;flex-wrap:wrap}.ass img{width:200px;max-width:100%;border-radius:6px;border:1px solid var(--line)}
+.tag{display:inline-block;font-family:'IBM Plex Mono';font-size:12px;border:1px solid var(--warn);color:var(--warn);border-radius:4px;padding:1px 6px}
+.lock{opacity:.55}
+.hidden{display:none}
+.bar{height:6px;background:#0b151c;border-radius:3px;overflow:hidden;margin-top:12px}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width 1.4s}
+</style>
+</head>
+<body>
+<header><div class="logo">KH</div><div><div class="hn">Kripo Datenbank Hochtal</div><div class="hs">Interner Zugang · fiktive Dienststelle</div></div></header>
+<main>
+<div class="box" id="login">
+ <h2>Anmeldung</h2>
+ <p>Zugriff auf Fallakten nur für Ermittelnde. Bei Ermittlungen vor Ort meldet sich das Präsidium mit der Dienstnummer der Ermittlung vor Ort an.</p>
+ <label>Dienstnummer</label><input id="dn" placeholder="z. B. AB 1234" autocomplete="off">
+ <button id="go">Anmelden</button><div class="bar hidden" id="bar"><i></i></div>
+ <div class="err" id="err"></div>
+ <div class="fine">Dies ist eine frei erfundene Seite aus dem Krimi Adventskalender „Zimmer 24“. Keine echte Polizeidatenbank.</div>
+</div>
+<div id="app" class="hidden">
+ <div class="box"><h2>Vorgang 2412/26 · Todesermittlung</h2>
+  <div class="kv"><div>Verstorbener</div><div>Wendt, Konrad, 63 Jahre</div><div>Fundort</div><div>Berghotel Sternwand, Suite 24, 4. Stock</div><div>Auffindezeit</div><div>1.12., 7:10 Uhr</div><div>Status</div><div><span class="tag">Tatort nicht erreichbar</span></div></div>
+ </div>
+ <div class="box"><h2>Asservat 1</h2>
+  <div class="ass"><img src="../a/asservat1.jpg" alt="Asservat 1"><div class="kv" style="flex:1;min-width:220px">
+   <div>Gegenstand</div><div>Eispickel, Holzschaft, Stahlkopf</div>
+   <div>Fundort</div><div>Teppich neben dem Verstorbenen</div>
+   <div>Anhaftungen</div><div>an der Spitze, Untersuchung folgt</div>
+   <div>Gravur</div><div>Bergschule Sternwand</div>
+   <div>Seriennummer</div><div><b>ES 44?1</b><br><span style="color:var(--mut);font-size:13px">dritte Ziffer durch Anhaftungen unleserlich</span></div>
+  </div></div>
+ </div>
+ <div class="box lock"><h2>Asservat 2</h2><p>In Bearbeitung. Freigabe folgt im Lauf der Ermittlung.</p></div>
+ <div class="box lock"><h2>Obduktion</h2><p>Leiche nicht erreichbar. Vorläufiger Bericht folgt.</p></div>
+</div>
+</main>
+<script>
+const H='1874abca7071fa373cbbe72d835c2715e7e3e67b7878a00ae81ba361492f4427';
+const sha=async s=>{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')};
+const norm=s=>(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+function open(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden')}
+try{if(sessionStorage.getItem('kh_ok')==='1')open()}catch(e){}
+document.getElementById('go').onclick=async()=>{const v=norm(document.getElementById('dn').value),e=document.getElementById('err'),bar=document.getElementById('bar');e.textContent='';
+ if(!v){e.textContent='Bitte Dienstnummer eingeben.';return}
+ bar.classList.remove('hidden');bar.firstElementChild.style.width='0';requestAnimationFrame(()=>bar.firstElementChild.style.width='100%');
+ setTimeout(async()=>{if(await sha('kh|'+v)===H){try{sessionStorage.setItem('kh_ok','1')}catch(x){}open()}else{bar.classList.add('hidden');e.textContent='Zugriff verweigert. Dienstnummer unbekannt oder nicht am Vorgang beteiligt.'}},1500)};
+document.getElementById('dn').addEventListener('keydown',ev=>{if(ev.key==='Enter')document.getElementById('go').click()});
+</script>
+</body>
+</html>
