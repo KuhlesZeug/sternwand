@@ -17,13 +17,25 @@ window.DOCS={
    ['13 bis 14','','frei'],
    ['15','Sophie Lang','Wanderblog, 26.11. bis 4.12.'],
    ['16 bis 17','','frei'],
-   ['18','','<b>gesperrt, Wasserschaden</b>'],
+   ['18','','<b>gesperrt, Wasserschaden</b>, Schlüssel am Brett'],
    ['19 bis 22','','frei'],
    ['23','Marlene Wendt','Familie'],
    ['24','Konrad Wendt','Suite, Inhaber']
   ])+
   '<p class="dn">Personal wohnt im Personaltrakt (Zimmer 1 bis 4) und hat eigene Schlüssel. Am Schlüsselbrett hängen nur die Gästezimmer 5 bis 24.</p>'+
-  '<div class="dsig">Gefaxt 30.11., 23:58 · Marlene Wendt</div>'},
+  '<div class="dsig">Gefaxt 1.12., 7:42 · Marlene Wendt</div>'},
+
+ schluesselbuch:{role:'B',day:1,tab:'Schlüsselbuch',title:'Schlüsselbuch der Rezeption',html:()=>
+  hd('Berghotel Sternwand · Rezeption','Schlüsselbuch','Ausgabe und Rückgabe der Zimmerschlüssel')+
+  tab(['Datum','Zimmer','an','aus','zurück'],[
+   ['24.11.','18','Fa. Moser, Installateur','8:10','17:05'],
+   ['25.11.','18','Fa. Moser, Installateur','8:05','16:40'],
+   ['26.11.','15','S. Lang, Gast','15:20',''],
+   ['27.11.','7','Dr. F. Ahrens, Gast','18:45',''],
+   ['27.11.','18','Fa. Moser, Installateur','8:00','16:30']
+  ])+
+  '<p class="hw">Familie Wendt (12, 23, 24) hat ihre Schlüssel dauerhaft bei sich und trägt sich nicht ein.</p>'+
+  '<div class="note" style="margin-top:12px"><div class="sl-h">Zettel am Buch</div><p class="hw">Zimmer 18 bleibt zu, bis alles trocken ist! Schlüssel hängt am Brett und wird an NIEMANDEN rausgegeben. Nur ich oder Fa. Moser. A. Gruber, 27.11.</p></div>'},
 
  dienst_kueche:{role:'B',day:3,tab:'Dienstplan',title:'Dienstplan Küche und Service',html:()=>
   hd('Berghotel Sternwand · Personal','Dienstplan Küche und Service','Woche 48 und 49')+

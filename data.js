@@ -10,10 +10,10 @@ window.DAYS={
    {x:.80,y:.53,w:.08,h:.08,label:'Glocke',open:{t:'sfx',k:'bell',cap:'Niemand kommt. Der Nachtportier ist wegen des Sturms gar nicht erst heraufgekommen.'}},
    {x:.01,y:.04,w:.46,h:.44,label:'Fenster',open:{t:'text',cap:'Draußen nur Weiß. Der Schnee liegt bis an die Fensterbank. Hier kommt heute niemand weg.'}}
   ]}]},
- B:{vo:'a/vo_d1b.mp3',scene:'Kurz nach sieben reißt dich das Telefon aus dem Schlaf. Ein Toter im Berghotel Sternwand, ganz oben im Hochtal. Die Straße ist dicht. Wer oben ermittelt, sitzt mit dem Täter fest, wer auch immer das ist. Du bist die einzige Verbindung nach draußen. Vor dir liegt die Fallakte, die das Hotel noch in der Nacht gefaxt hat. Fang mit dem Belegungsplan an.',
-  mods:[{t:'doc',id:'belegung'}]},
- hints:{A:['Frag dein Präsidium, wer in welchem Zimmer wohnt.','Ein Schlüssel fehlt, obwohl das Zimmer leer sein müsste.'],B:['Lass dir von oben sagen, welche Schlüssel am Brett fehlen.','Vergleiche die fehlenden Schlüssel mit deinem Belegungsplan.']},
- reveal:{vo:'a/vo_d1r.mp3',text:'Fünf Schlüssel sind bei ihren Gästen. Aber der Schlüssel zu Zimmer 18 fehlt, und dort wohnt niemand. Wer braucht in einer Mordnacht ein leeres Zimmer? Tragt die Verdächtigen auf eurer Tafel ein. Morgen klopft ihr beim Bergführer. Neben der Leiche lag sein Werkzeug.'}},
+ B:{vo:'a/vo_d1b.mp3',scene:'Kurz nach sieben reißt dich das Telefon aus dem Schlaf. Ein Toter im Berghotel Sternwand, ganz oben im Hochtal. Die Straße ist dicht. Wer oben ermittelt, sitzt mit dem Täter fest, wer auch immer das ist. Du bist die einzige Verbindung nach draußen. Das Hotel hat dir heute früh die ersten Unterlagen gefaxt: den Belegungsplan und das Schlüsselbuch der Rezeption. Fang damit an.',
+  mods:[{t:'doc',id:'belegung'},{t:'doc',id:'schluesselbuch'}]},
+ hints:{A:['Frag dein Präsidium, wer in welchem Zimmer wohnt und wer welchen Schlüssel haben darf.','Fünf leere Haken lassen sich erklären. Einer nicht.'],B:['Lass dir von oben sagen, welche Schlüssel am Brett fehlen.','Welcher Schlüssel müsste laut Schlüsselbuch und Zettel am Brett hängen?']},
+ reveal:{vo:'a/vo_d1r.mp3',text:'Fünf Schlüssel sind bei ihren Gästen. Aber der Schlüssel zu Zimmer 18 darf das Brett nicht verlassen. Der Installateur hat ihn am Freitag zurückgebracht, seitdem durfte ihn niemand haben. Heute Nacht hat ihn trotzdem jemand genommen. Wer braucht in einer Mordnacht ein leeres Zimmer? Tragt die Verdächtigen auf eurer Tafel ein. Morgen klopft ihr beim Bergführer. Neben der Leiche lag sein Werkzeug.'}},
 
 2:{room:'Zimmer 2',code:'716b267e594a9da6e43b9649ba1880ee41d99771495bd1aabfe1972e1cdae301',
  A:{vo:'a/vo_d2a.mp3',scene:'Neben Konrad Wendt lag ein Eispickel, an der Spitze dunkle Flecken. Im ganzen Haus gibt es nur einen, der so etwas braucht: Tom Riedl, den Bergführer. Er wohnt unten im Personaltrakt, Zimmer 2. Verschlafen öffnet er dir die Tür und lässt dich herein. Sieh dich um. Und hör dir an, was er zu sagen hat.',
