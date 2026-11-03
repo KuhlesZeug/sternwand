@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><title>Druck</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=3">
 <style>
 @page{size:A4;margin:0}
 html,body{background:#fff;color:#20180f;margin:0}
@@ -17,13 +17,25 @@ html,body{background:#fff;color:#20180f;margin:0}
 .pg .tf img{width:28mm;height:35mm}
 .pg .tf-l{font-size:8pt}.pg .tf-l i{height:7mm}
 .cutline{border:1.5px dashed #7a6a50;border-radius:4mm;padding:4mm;display:inline-block}
+.pg-no{position:absolute;right:12mm;top:9mm;font-family:'Special Elite',monospace;font-size:13pt;background:#20180f;color:#f6efdf;border-radius:2mm;padding:1mm 3mm}
+.seal{border:1.5px dashed #7a6a50;height:22mm;margin:0 0 5mm;display:flex;align-items:center;background:repeating-linear-gradient(90deg,rgba(154,36,32,.08) 0 6mm,transparent 6mm 12mm)}
+.seal b{font-family:'Playfair Display',serif;font-size:18pt;padding:0 6mm;border-right:1.5px solid #9a2420;color:#9a2420}
+.seal span{font-family:'Special Elite',monospace;font-size:11pt;letter-spacing:.08em;text-transform:uppercase;padding:0 6mm;flex:1}
+.seal i{font-style:normal;font-size:9pt;color:#5a4a33;padding-right:6mm}
+.howto{font-size:11pt;line-height:1.6}.howto li{margin-bottom:2mm}
 </style></head><body>
 <div id="out"></div>
-<script src="docs.js?v=1"></script>
+<script src="docs.js?v=3"></script>
 <script>
 const p=new URLSearchParams(location.search),R=(p.get('r')||'A').toUpperCase();
-const T=R==='A'?'Tatortmappe · Ermittlung vor Ort':'Fallakte Wendt · Präsidium im Tal';
-const L=Object.entries(DOCS).filter(([k,d])=>d.role===R).sort((a,b)=>a[1].day-b[1].day);
-document.getElementById('out').innerHTML=L.map(([k,d],i)=>'<section class="pg"><div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>'+d.title+'</b></div>'+(k==='ausweis'?'<div class="cutline">'+d.html('')+'</div><p class="dn">Ausschneiden und bereithalten. Trag deinen Namen ein und klebe ein Foto auf, wenn du magst.</p>':d.html(''))+'<div class="pg-foot"><span>© KuhlesZeug · nur für den privaten Gebrauch · frei erfundene Geschichte</span><span>Rolle '+R+' · Seite '+(i+1)+'</span></div></section>').join('');
+const T=R==='A'?'Unterlagen vor Ort':'Fallakte Präsidium';
+const L=Object.entries(DOCS).filter(([k,d])=>d.role===R&&d.no).sort((a,b)=>a[1].no.localeCompare(b[1].no,undefined,{numeric:true}));
+const seals=L.filter(([k,d])=>d.sealed);
+const foot=n=>'<div class="pg-foot"><span>© KuhlesZeug · nur für den privaten Gebrauch · frei erfundene Geschichte</span><span>Rolle '+R+' · Seite '+n+'</span></div>';
+let pages=[];
+pages.push('<section class="pg"><div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>So bereitest du alles vor</b></div><ol class="howto"><li>Lies dieses Blatt, dann leg die Blätter '+L.filter(([k,d])=>!d.sealed).map(([k,d])=>d.no).join(', ')+' offen auf den Tisch.</li><li>Alle anderen Blätter einmal falten, Schrift nach innen. <b>Nicht lesen.</b></li><li>Schneide die Banderolen unten aus, leg jede um das Blatt mit derselben Nummer und klebe sie zusammen.</li><li>Leg die versiegelten Blätter auf einen Stapel neben dein Handy. Die App sagt dir, wann du welches öffnen darfst.</li></ol>'+
+ seals.map(([k,d])=>'<div class="seal"><b>'+d.no+'</b><span>Versiegelt · erst öffnen, wenn die App es sagt</span><i>Zimmer 24</i></div>').join('')+foot(1)+'</section>');
+L.forEach(([k,d])=>pages.push('<section class="pg"><div class="pg-no">'+d.no+'</div><div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>'+d.title+'</b></div>'+(k==='ausweis'?'<div class="cutline">'+d.html('')+'</div><p class="dn">Ausschneiden und bereithalten. Trag deinen Namen ein und klebe ein Foto auf, wenn du magst.</p>':d.html(''))+foot(pages.length+1)+'</section>'));
+document.getElementById('out').innerHTML=pages.join('');
 </script>
 </body></html>

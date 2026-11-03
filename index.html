@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 <canvas id="snow"></canvas>
@@ -28,6 +28,32 @@
     <button id="btn-start" class="btn big">Ermittlung beginnen</button>
     <p class="small">Mit Ton spielen. Mit Kopfhörern wird es noch dichter.</p>
   </div>
+</section>
+
+<section id="s-name" class="screen">
+  <div class="start-bg dim"></div>
+  <div class="start-in mid">
+    <div class="kick" id="name-kick"></div>
+    <h2 class="h2">Wer ermittelt?</h2>
+    <p class="lead2" id="name-lead"></p>
+    <label class="fl"><span>Dein Name</span><input id="nm-me" maxlength="24" autocomplete="off" placeholder="Vorname"></label>
+    <label class="fl"><span id="nm-pa-l"></span><input id="nm-pa" maxlength="24" autocomplete="off" placeholder="Vorname"></label>
+    <button id="btn-name" class="btn big">Weiter</button>
+    <p class="small">Die Namen erscheinen in der Geschichte, in Faxen und Datenbank und am Ende auf eurer Urkunde.</p>
+  </div>
+</section>
+
+<section id="s-intro" class="screen">
+  <div class="film" id="film"></div>
+  <div class="film-sub" id="film-sub"></div>
+  <div class="film-bar"><i id="film-prog"></i></div>
+  <button class="btn ghost sm film-skip" id="btn-skip">Überspringen</button>
+  <button class="btn big film-play" id="btn-film">Film starten</button>
+</section>
+
+<section id="s-kit" class="screen">
+  <header class="top"><div><div class="kick" id="kit-kick"></div><div class="title" id="kit-title"></div></div><div class="topbtns"></div></header>
+  <div class="kit-in" id="kit"></div>
 </section>
 
 <section id="s-desk" class="screen">
@@ -75,10 +101,11 @@
 </div>
 <div id="toast" class="toast"></div>
 
-<script src="gate.js?v=2"></script>
-<script src="icons.js?v=2"></script>
-<script src="docs.js?v=2"></script>
-<script src="data.js?v=2"></script>
-<script src="app.js?v=2"></script>
+<script src="gate.js?v=3"></script>
+<script src="icons.js?v=3"></script>
+<script src="docs.js?v=3"></script>
+<script src="data.js?v=3"></script>
+<script src="amb.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
