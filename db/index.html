@@ -27,6 +27,7 @@ h2{font-size:18px;margin:0 0 10px}
 .hidden{display:none}
 .bar{height:6px;background:#0b151c;border-radius:3px;overflow:hidden;margin-top:12px}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width 1.4s}
 </style>
+<style>.who{font-size:13px;color:var(--mut);margin:0 0 12px;padding:8px 12px;border:1px solid rgba(255,255,255,.12);border-radius:10px}.who b{color:inherit}</style>
 </head>
 <body>
 <header><div class="logo">KH</div><div><div class="hn">Kripo Datenbank Hochtal</div><div class="hs">Interner Zugang · fiktive Dienststelle</div></div></header>
@@ -40,6 +41,7 @@ h2{font-size:18px;margin:0 0 10px}
  <div class="fine">Dies ist eine frei erfundene Seite aus dem Krimi Adventskalender „Zimmer 24“. Keine echte Polizeidatenbank.</div>
 </div>
 <div id="app" class="hidden">
+ <div class="who" id="who"></div>
  <div class="box"><h2>Vorgang 2412/26 · Todesermittlung</h2>
   <div class="kv"><div>Verstorbener</div><div>Wendt, Konrad, 63 Jahre</div><div>Fundort</div><div>Berghotel Sternwand, Suite 24, 4. Stock</div><div>Auffindezeit</div><div>1.12., 7:10 Uhr</div><div>Status</div><div><span class="tag">Tatort nicht erreichbar</span></div></div>
  </div>
@@ -60,7 +62,10 @@ h2{font-size:18px;margin:0 0 10px}
 const H='1874abca7071fa373cbbe72d835c2715e7e3e67b7878a00ae81ba361492f4427';
 const sha=async s=>{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')};
 const norm=s=>(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
-function open(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden')}
+function open(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');
+ let me='',pa='';try{const o=JSON.parse(localStorage.getItem('kz_sternwand_v1_B')||'{}');me=o.me||'';pa=o.pa||''}catch(x){}
+ const esc=t=>String(t).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+ document.getElementById('who').innerHTML='Angemeldet: '+(me?'<b>'+esc(me)+'</b>, Präsidium':'Präsidium')+' · Dienstnummer HT 2412'+(pa?' ('+esc(pa)+', vor Ort)':'')}
 try{if(sessionStorage.getItem('kh_ok')==='1')open()}catch(e){}
 document.getElementById('go').onclick=async()=>{const v=norm(document.getElementById('dn').value),e=document.getElementById('err'),bar=document.getElementById('bar');e.textContent='';
  if(!v){e.textContent='Bitte Dienstnummer eingeben.';return}
