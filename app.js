@@ -103,7 +103,8 @@ function goDesk(){stopAudio();renderDesk();show('#s-desk')}
 function newTrail(d){const D=DAYS[d];if(!D)return false;return ['A','B'].includes(ROLE)&&(D[ROLE].mods||[]).some(m=>(m.spots||[]).some(s=>s.after&&st.solved[s.after]&&!(st.trail||{})[d+'_'+s.label]))}
 function renderDesk(){$('#desk-kick').textContent=RN[ROLE];const g=$('#doors');g.innerHTML='';let n=0;
  for(let d=1;d<=24;d++){const has=!!DAYS[d],open=unlocked(d),done=!!st.solved[d];if(done)n++;
-  const b=el('button','door'+(done?' done':'')+(!open||!has?' shut':''),'<span class="dn">'+d+'</span><span class="dr">'+(ROOMS[d-1]||'')+'</span>'+(newTrail(d)?'<span class="dnew">Neue Spur</span>':'')+(done?'<span class="dok">'+KI.check+'</span>':(!open||!has?'<span class="dlk">'+KI.lock+'</span>':'')));
+  const RL=ROLE==='B'?ROOMS_B:ROOMS;
+  const b=el('button','door'+(done?' done':'')+(!open||!has?' shut':''),'<span class="dimg" style="background-image:url(a/door_'+(ROLE==='B'?'b':'a')+String(d).padStart(2,'0')+'.jpg?v=5)"></span><span class="dn">'+d+'</span><span class="dr">'+(RL[d-1]||'')+'</span>'+(newTrail(d)?'<span class="dnew">Neue Spur</span>':'')+(done?'<span class="dok">'+KI.check+'</span>':(!open||!has?'<span class="dlk">'+KI.lock+'</span>':'')));
   b.onclick=()=>{ac();if(!has){toast(open?'Diese Tür ist noch in Arbeit.':'Diese Tür öffnet sich am '+d+'. Dezember.');return}if(!open){toast('Diese Tür öffnet sich am '+d+'. Dezember.');return}SFX.door();openDay(d)};g.appendChild(b)}
  $('#desk-lead').textContent=n?'Gelöst: '+n+' von 24 Türen. Was heute geschieht, löst ihr nur gemeinsam.':'Jeden Tag öffnet sich eine Tür. Ihr seht beide nur eure Hälfte. Redet miteinander.';
  $('#deskfoot').innerHTML=(PROBE?'Testmodus: alle vorhandenen Türen offen':'Verpasste Tage lassen sich jederzeit nachholen.')+'<br><button class="btn ghost sm desk-film" id="btn-kit">Unterlagen und Intro</button>';$('#btn-kit').onclick=()=>{ac();SFX.paper();goKit()}}
@@ -119,12 +120,13 @@ function openDay(d){curDay=d;const D=DAYS[d],R=D[ROLE];stopAudio();show('#s-day'
  renderHints();
  if(st.solved[d]){cc.classList.add('solved');showReveal(false)}else{cc.classList.remove('solved');rv.classList.remove('on');rv.innerHTML=''}
  st.seen[d]=1;save()}
-function bindVoice(btn,src){if(!src){btn.style.display='none';return}const au=new Audio(src);au.preload='none';au.onerror=()=>{btn.classList.add('na');btn.querySelector('span:last-child').textContent='Stimme folgt'};
+function bindVoice(btn,src){if(!src){btn.style.display='none';return}const au=new Audio(src);au.preload='none';au.onerror=()=>{btn.classList.add('na');const sp=btn.querySelector('span:last-child');if(sp&&!sp.classList.contains('vo-ic'))sp.textContent='Stimme folgt'};
  au._ui=on=>{AMBI.duck(on);btn.classList.toggle('on',on);btn.querySelector('.vo-ic').innerHTML=on?KI.pause:KI.play};au.onended=()=>au._ui(false);
  btn.onclick=()=>{ac();if(btn.classList.contains('na'))return;if(curAudio===au&&!au.paused){au.pause();au._ui(false);return}stopAudio();curAudio=au;if(!st.sound){toast('Ton ist aus.');return}au.play().then(()=>au._ui(true)).catch(()=>{})}}
 function renderHints(){const h=$('#hints'),D=DAYS[curDay],L=D.hints[ROLE],k=curDay+ROLE,n=st.hint[k]||0;h.innerHTML='';
- L.forEach((t,i)=>{if(i<n)h.appendChild(el('div','hint','<b>Tipp '+(i+1)+'</b> '+t))});
- if(n<L.length&&!st.solved[curDay]){const b=el('button','btn ghost sm','<span>'+KI.hint+'</span> Tipp '+(n+1)+' ansehen');b.onclick=()=>{SFX.paper();st.hint[k]=n+1;save();renderHints()};h.appendChild(b)}}
+ L.forEach((t,i)=>{if(i<n){const d=el('div','hint','<span><b>Tipp '+(i+1)+'</b> '+t+'</span>');const src=hintSrc(i);if(src){const vb=el('button','hint-vo','<span class="vo-ic">'+KI.play+'</span>');vb.setAttribute('aria-label','Tipp anhören');d.prepend(vb);bindVoice(vb,src)}h.appendChild(d)}});
+ if(n<L.length&&!st.solved[curDay]){const b=el('button','btn ghost sm','<span>'+KI.hint+'</span> Tipp '+(n+1)+' ansehen');b.onclick=()=>{SFX.paper();st.hint[k]=n+1;save();renderHints();if(st.sound){const vb=h.querySelectorAll('.hint-vo')[n];vb&&setTimeout(()=>vb.click(),250)}};h.appendChild(b)}}
+function hintSrc(i){const D=DAYS[curDay];return D.hintVo&&D.hintVo[ROLE]&&D.hintVo[ROLE][i]||null}
 $('#btn-check').onclick=async()=>{ac();const v=norm($('#daycode').value);if(!v)return;const D=DAYS[curDay];
  if(await kzSha('sw|'+curDay+'|'+v)===D.code){st.solved[curDay]=1;save();AMBI.sfx.stamp();setTimeout(SFX.ok,250);$('#codecard').classList.add('solved');showReveal(true)}else{SFX.no();const c=$('#codecard');c.classList.remove('shake');void c.offsetWidth;c.classList.add('shake');toast('Das passt nicht. Habt ihr alles verglichen?')}};
 $('#daycode').addEventListener('keydown',e=>{if(e.key==='Enter')$('#btn-check').click()});
