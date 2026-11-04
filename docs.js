@@ -58,7 +58,7 @@ window.DOCS={
   '<div class="tw">'+tab(['Name','Bereich','Sa 28.11.','So 29.11.','Mo 30.11.','Di 1.12.'],[
    ['Ilse Brandt','Küche','14:00 bis 22:00','frei','14:00 bis 22:00','6:00 bis 14:00'],
    ['Luca Moretti','Bar','18:00 bis 1:00','18:00 bis 1:00','18:00 bis 1:00','frei'],
-   ['Alois Gruber','Haustechnik','7:00 bis 16:00','frei','7:00 bis 16:00','Bereitschaft'],
+   ['Sepp Gruber','Haustechnik','7:00 bis 16:00','frei','7:00 bis 16:00','Bereitschaft'],
    ['Tom Riedl','Bergschule','nach Buchung','nach Buchung','keine Touren','keine Touren']
   ])+'</div>'+
   '<p class="dn">Die Küche schließt um 22:00. Danach nur Bar und Zimmerservice auf Anfrage.</p>'+

@@ -151,7 +151,7 @@ const MODS={
  doc(x){const d=DOCS[x.id];const w=el('button','mod docl','<span class="dl-ic">'+KI.doc+'</span><span><b>'+(ROLE==='B'?'Fallakte':'Tatortmappe')+': '+d.title+'</b><i>Liegt auch ausgedruckt vor dir</i></span>');w.onclick=()=>{SFX.paper();openAkte(x.id)};return w},
  web(x){const w=el('a','mod docl web','<span class="dl-ic">'+KI.web+'</span><span><b>'+x.label+'</b><i>'+x.note+'</i></span>');w.href=x.url;w.target='_blank';w.rel='noopener';return w}
 };
-function openSpot(s){const o=s.open;if(o.t==='sfx'){SFX[o.k]&&SFX[o.k]();toast(o.cap);return}
+function openSpot(s){const o=s.open;if(window.OPEN_X&&OPEN_X[o.t])return OPEN_X[o.t](o,s);if(o.t==='sfx'){SFX[o.k]&&SFX[o.k]();toast(o.cap);return}
  if(o.t==='fax')return faxIn(o);if(o.t==='pc')return pcOpen(o);if(o.t==='wall')return wallOpen();if(o.t==='pile')return pileOpen(o);
  if(o.t==='env'){const d=DOCS[o.id];st.env=st.env||{};st.env[o.id]=1;save();viewer('<div class="note env"><div class="sl-h">Fundstück</div><p>'+o.cap+'</p><div class="env-big"><span>Öffne jetzt</span><b>Umschlag '+d.no+'</b><i>'+d.title+'</i></div></div>');return}
  let h='';if(o.t==='zoom')h='<img class="v-img" src="'+o.img+'" alt=""><p class="v-cap">'+(o.cap||'')+'</p>';
@@ -163,18 +163,19 @@ function envOpen(ids){setTimeout(()=>AMBI.sfx.tear(),300);st.env=st.env||{};ids.
 function faxIn(o){viewer('<div class="fax"><div class="fax-dev"><img src="a/in_b3.jpg" alt=""></div><div class="fax-lcd" id="fax-lcd">EMPFANG …</div><div class="fax-paper" id="fax-paper"><div class="fp-h">'+o.from+'</div><div class="fp-l"></div><div class="fp-l"></div><div class="fp-l s"></div><div class="fp-l"></div><div class="fp-l s"></div></div><div class="fax-out" id="fax-out"></div></div>');
  ac();AMBI.sfx.fax();
  setTimeout(()=>{const l=$('#fax-lcd');if(l)l.textContent=(o.pages||1)+' SEITE'+((o.pages||1)>1?'N':'')+' OK';const f=$('#fax-out');if(f)f.innerHTML='<p class="v-cap">'+o.cap+'</p>'+envOpen(o.items)},4200)}
-const PC_APPS={db:{n:'Kripo Datenbank',ic:'akte'},mail:{n:'Postfach',ic:'doc'},hr:{n:'Handelsregister',ic:'web',day:4},ar:{n:'Archiv Hochtaler Bote',ic:'doc',day:8},lab:{n:'Laborportal Bergklinik',ic:'eye',day:16}};
+const PC_APPS={db:{n:'Kripo Datenbank',im:'icon_db'},mail:{n:'Postfach',im:'icon_mail'},hr:{n:'Handelsregister',im:'icon_hr',day:4},web:{n:'Hotel Website',im:'icon_web',day:6},ar:{n:'Archiv Hochtaler Bote',im:'icon_ar',day:8},lab:{n:'Laborportal Bergklinik',im:'icon_lab',day:16}};
 const MAILS=[{d:1,f:'Leitstelle Hochtal',s:'Todesermittlung Berghotel Sternwand',b:'Einsatz übernommen. Straße und Seilbahn gesperrt, keine Anfahrt möglich. Vor Ort ist eine Kollegin oder ein Kollege der Kripo im Urlaub. Kontakt nur telefonisch. Unterlagen kommen per Fax.'},
  {d:2,f:'IT Präsidium',s:'Datenbank im Notfallbetrieb',b:'Wegen des Sturms läuft die Datenbank im Notfallbetrieb. Anmeldung mit der Dienstnummer der Ermittlung vor Ort, siehe Zugangsblatt. Kein Passwort nötig.'},
  {d:3,f:'Hausdienst Präsidium',s:'Faxraum',b:'Durch den Sturm gab es heute Nacht Stromschwankungen. Das Gerät im Faxraum hat alle Eingänge auf einen Haufen ausgedruckt. Bitte die eigenen Faxe selbst heraussuchen.'}];
-function pcOpen(o){const m=maxDay();const appsH=Object.entries(PC_APPS).map(([k,a])=>{const lock=a.day&&a.day>m;return '<button class="pc-ic'+(lock?' lock':'')+'" data-k="'+k+'"><span class="pc-g">'+(KI[a.ic]||KI.doc)+'</span><span>'+a.n+'</span></button>'}).join('');
- AMBI.sfx.boot();viewer('<div class="pc"><div class="pc-top"><span>Dienstrechner · K1</span><span>'+esc(st.me)+'</span></div><div class="pc-desk" id="pc-desk">'+appsH+'</div><div class="pc-win" id="pc-win"></div></div>');$('#v-body').classList.add('wide');
+function pcOpen(o){const m=maxDay();const appsH=Object.entries(PC_APPS).map(([k,a])=>{const lock=a.day&&a.day>m;return '<button class="pc-ic'+(lock?' lock':'')+'" data-k="'+k+'"><span class="pc-g"><img src="a/'+a.im+'.jpg" alt=""></span><span>'+a.n+'</span></button>'}).join('');
+ AMBI.sfx.boot();viewer('<div class="pc"><div class="pc-top"><span>'+((o&&o.title)||'Dienstrechner · K1')+'</span><span>'+esc(st.me)+'</span></div><div class="pc-desk" id="pc-desk">'+appsH+'</div><div class="pc-win" id="pc-win"></div></div>');$('#v-body').classList.add('wide');
  document.querySelectorAll('.pc-ic').forEach(b=>b.onclick=()=>{AMBI.sfx.click();setTimeout(()=>AMBI.sfx.type(6),150);const k=b.dataset.k,a=PC_APPS[k],w=$('#pc-win');if(b.classList.contains('lock')){toast('Kein Zugang. Wird im Lauf der Ermittlung freigeschaltet.');return}
   w.classList.add('on');let h='<div class="pc-bar"><b>'+a.n+'</b><button class="pc-x">schließen</button></div>';
   if(k==='db')h+='<iframe src="db/" class="pc-frame" title="Kripo Datenbank"></iframe>';
   else if(k==='mail'){const L=MAILS.filter(x=>x.d<=Math.max(curDay||1,1)).reverse();h+='<div class="pc-mail">'+L.map((x,i)=>'<details'+(i===0?' open':'')+'><summary><b>'+x.f+'</b><span>'+x.s+'</span></summary><p>'+x.b+'</p></details>').join('')+'</div>'}
+  else if(window.PC_RENDER&&PC_RENDER[k])h+='<div class="pc-body" id="pc-body"></div>';
   else h+='<div class="pc-empty">Verbindung wird aufgebaut …</div>';
-  w.innerHTML=h;w.querySelector('.pc-x').onclick=()=>{w.classList.remove('on');w.innerHTML=''}});
+  w.innerHTML=h;if(window.PC_RENDER&&PC_RENDER[k]&&$('#pc-body'))PC_RENDER[k]($('#pc-body'));w.querySelector('.pc-x').onclick=()=>{w.classList.remove('on');w.innerHTML=''}});
  if(o&&o.app)setTimeout(()=>{const b=document.querySelector('.pc-ic[data-k="'+o.app+'"]');b&&b.click()},350)}
 function pileOpen(o){const L=o.sheets.slice().sort(()=>Math.random()-.5);
  viewer('<div class="pile"><p class="v-cap top">'+o.cap+'</p><div class="pile-g">'+L.map((x,i)=>'<button class="pile-s" style="--r:'+((i*37%9)-4)+'deg" data-ok="'+(x.ok?1:0)+'"><span class="ps-h">'+x.h+'</span><span class="ps-l"></span><span class="ps-l s"></span><span class="ps-l"></span><span class="ps-t">'+x.t+'</span></button>').join('')+'</div><div id="pile-out"></div></div>');
