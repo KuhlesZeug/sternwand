@@ -5,10 +5,10 @@ const name=()=>st.me||'';
 const card=()=>B.idcard(ROLE,name(),st.selfie||'');
 MODS.idcard=function(x){const w=el('div','mod idm','<div class="idm-h">'+x.h+'</div><div class="idm-c"></div><div class="idm-b"></div><p class="idm-n">'+T(x.note||'')+'</p>');
  const draw=()=>{w.querySelector('.idm-c').innerHTML=card();const bb=w.querySelector('.idm-b');
-  bb.innerHTML='<button class="btn sm">'+(st.selfie?'Neues Foto machen':'Foto für den Ausweis machen')+'</button>';bb.firstChild.onclick=()=>{ac();selfie(()=>draw())}};
+  bb.innerHTML='<button class="btn sm">'+(st.selfie?'Neues Foto machen':'Foto für den Ausweis machen')+'</button>'+(st.selfie?'<button class="btn ghost sm idm-del">Foto entfernen</button>':'')+'<p class="idm-priv">Dein Foto bleibt nur auf diesem Gerät. Es wird nicht hochgeladen und nicht an uns gesendet.</p>';bb.firstChild.onclick=()=>{ac();selfie(()=>draw())};const del=bb.querySelector('.idm-del');if(del)del.onclick=()=>{delete st.selfie;save();toast('Foto entfernt.');draw()}};
  draw();return w};
 function selfie(done){
- viewer('<div class="idc-cam"><p class="v-cap top">Schau in die Kamera und halte dein Gesicht in den Rahmen. Das Bild bleibt nur auf deinem Gerät.</p><div class="cv"><video id="cam-v" playsinline autoplay muted></video><div class="ov"></div></div><div class="fe-b"><button class="btn" id="cam-go">Auslösen</button><label class="btn ghost" id="cam-f">Bild wählen<input type="file" accept="image/*" capture="user" hidden></label></div><p class="v-cap" id="cam-msg"></p></div>');
+ viewer('<div class="idc-cam"><p class="v-cap top">Schau in die Kamera und halte dein Gesicht in den Rahmen.</p><div class="cv"><video id="cam-v" playsinline autoplay muted></video><div class="ov"></div></div><div class="fe-b"><button class="btn" id="cam-go">Auslösen</button><label class="btn ghost" id="cam-f">Bild wählen<input type="file" accept="image/*" capture="user" hidden></label></div><p class="v-cap" id="cam-msg"></p><p class="idm-priv">Das Foto wird nur auf diesem Gerät gespeichert und nirgendwohin übertragen. Du kannst es jederzeit wieder entfernen.</p></div>');
  const v=$('#cam-v');let stream=null;
  const stop=()=>{if(stream)stream.getTracks().forEach(t=>t.stop());stream=null};
  const fin=src=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=240;c.height=300;const g=c.getContext('2d');
