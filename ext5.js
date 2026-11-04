@@ -112,3 +112,9 @@ MAILS.push({d:9,f:'IT Präsidium',s:'Gastzugang Hotelsoft gesperrt',b:'Der Gastz
 // Ilses Zimmer ist abgeschlossen
 if(DAYS[17]&&DAYS[17].A)DAYS[17].A.mods.forEach(m=>{if(m.t==='room'){m.gate='pick_17';m.gateCap='Ilses Tür ist abgeschlossen. Sie steht unten in der Küche, und fragen willst du sie noch nicht. Das alte Schloss hakt, aber in der Werkzeugkiste aus dem Technikraum liegt ein Satz Dietriche.'}});
 })();
+// ===== Persönlicher Geschenklink: Namen, Absender, Botschaft, ohne Zugangscode =====
+(async function(){try{const q=new URLSearchParams(location.search);const an=(q.get('an')||'').slice(0,24),pa=(q.get('pa')||'').slice(0,24),von=(q.get('von')||'').slice(0,40),m=q.get('m')||'',s=q.get('s')||'';
+ if(!an&&!von)return;
+ if(an&&!st.me)st.me=an;if(pa&&!st.pa)st.pa=pa;save();
+ const gl=document.getElementById('giftline');if(gl&&von)gl.textContent=(an?'Für '+an+', ':'')+'ein Geschenk von '+von;
+ if(s&&s===await kzSig(an,von,m)){st.act=1;save();const cb=document.getElementById('codebox');if(cb)cb.style.display='none'}}catch(e){}})();

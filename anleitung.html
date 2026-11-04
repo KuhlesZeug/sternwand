@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Einsatzmappe für die Spielleitung · Zimmer 24</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Special+Elite&family=Caveat:wght@500;700&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=Herr+Von+Muellerhoff&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="brand.css?v=9">
+<style>
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;background:#555;color:#1d1a15;font-family:Lora,serif}
+.pg{width:210mm;height:296.5mm;position:relative;overflow:hidden;margin:0 auto 8mm;background:#f1efe9 url(a/paper_amt.jpg) center/cover;padding:15mm 16mm 18mm;page-break-after:always;break-after:page}
+.pg:last-of-type{page-break-after:auto;break-after:auto}
+@media print{html,body{background:none}.pg{margin:0}}
+.pg.hotel{background:#f7f1e2 url(a/paper_hotel.jpg) center/cover}
+.ft{position:absolute;left:16mm;right:16mm;bottom:9mm;display:flex;justify-content:space-between;font-family:Barlow,sans-serif;font-size:7.5pt;color:#6a6152;border-top:1px solid rgba(0,0,0,.25);padding-top:2mm}
+.no{position:absolute;right:16mm;top:9mm;font-family:'Courier Prime',monospace;font-size:9pt;color:#55697d;letter-spacing:.1em}
+p{font-size:10.6pt;line-height:1.55;margin:2.4mm 0}
+h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:21pt;letter-spacing:.02em;color:#1b3046;margin:5mm 0 2mm}
+h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12.5pt;letter-spacing:.14em;text-transform:uppercase;color:#1b3046;margin:5mm 0 1.5mm}
+.lh{margin-bottom:4mm}.lh-logo{height:20mm}.lh-n b{font-size:24pt!important}.lh-a{font-size:8pt}
+/* Deckblatt */
+.cover{padding:0;background:#0b141c;color:#f3ecdc}
+.cover .ph{position:absolute;inset:0;background:url(a/hotel.jpg) center/cover;filter:brightness(.78) saturate(.95)}
+.cover .gr{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,20,28,.15) 0%,rgba(11,20,28,.2) 45%,rgba(11,20,28,.92) 78%)}
+.cover .in{position:absolute;left:18mm;right:18mm;bottom:22mm}
+.cover .k{font-family:'Special Elite',monospace;font-size:10pt;letter-spacing:.24em;text-transform:uppercase;color:#cfa863}
+.cover h1{font-family:'Playfair Display',serif;font-weight:800;font-size:58pt;line-height:.95;margin:3mm 0 2mm;color:#fff}
+.cover .s{font-family:'Playfair Display',serif;font-style:italic;font-size:20pt;color:#f3ecdc}
+.cover .m{margin-top:9mm;display:flex;align-items:center;gap:6mm;border-top:1px solid rgba(207,168,99,.5);padding-top:5mm}
+.cover .m img{height:24mm;filter:drop-shadow(0 0 3px rgba(0,0,0,.6))}
+.cover .m b{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17pt;letter-spacing:.08em;text-transform:uppercase}
+.cover .m span{font-family:Barlow,sans-serif;font-size:10pt;opacity:.85}
+.cover .tag{position:absolute;right:16mm;top:16mm;transform:rotate(7deg);background:rgba(246,239,222,.92);padding:3mm 4mm;border-radius:1mm;box-shadow:0 2mm 6mm rgba(0,0,0,.5)}
+.cover .tag .box-st{margin:0}
+.cover .az{position:absolute;left:18mm;top:16mm;font-family:'Courier Prime',monospace;font-size:9pt;letter-spacing:.14em;background:rgba(11,20,28,.6);padding:1.5mm 3mm;border:1px solid rgba(207,168,99,.6)}
+/* Rollen */
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:4mm}
+.role{background:rgba(255,255,255,.55);border:1px solid rgba(27,48,70,.35);border-radius:2mm;overflow:hidden}
+.role img{width:100%;height:30mm;object-fit:cover;display:block}
+.role div{padding:3mm 4mm}
+.role span{font-family:Barlow,sans-serif;font-size:8pt;letter-spacing:.16em;text-transform:uppercase;color:#55697d}
+.role b{display:block;font-family:'Playfair Display',serif;font-size:15pt;margin:.5mm 0 1mm}
+.role p{font-size:9.6pt;margin:1mm 0}
+.chk{columns:2;column-gap:8mm;margin:2mm 0;padding:0;list-style:none}
+.chk li{break-inside:avoid;position:relative;padding-left:7mm;font-size:10.2pt;line-height:1.45;margin:1.6mm 0}
+.chk li:before{content:'';position:absolute;left:0;top:.8mm;width:3.6mm;height:3.6mm;border:1.4px solid #1b3046;border-radius:.6mm}
+.steps{counter-reset:s;margin:2mm 0;padding:0;list-style:none}
+.steps li{counter-increment:s;position:relative;padding:0 0 0 12mm;margin:3.2mm 0;font-size:10.4pt;line-height:1.5;min-height:9mm}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:8mm;height:8mm;border-radius:50%;background:#1b3046;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13pt;display:flex;align-items:center;justify-content:center}
+.steps li b{font-family:'Barlow Condensed',sans-serif;font-size:12.5pt;letter-spacing:.03em;color:#1b3046}
+.note{background:#f6e27a;padding:3mm 4mm;transform:rotate(-1deg);box-shadow:0 1.5mm 4mm rgba(0,0,0,.25);font-family:Caveat,cursive;font-size:15pt;line-height:1.25;color:#1d2a4a;margin:5mm 0 0 auto;max-width:85mm}
+.qrs{display:grid;grid-template-columns:1fr 1fr;gap:8mm;margin:4mm 0}
+.qr{border:1.5px solid #1b3046;border-radius:2mm;padding:4mm;text-align:center;background:rgba(255,255,255,.6)}
+.qr img{width:46mm;height:46mm;display:block;margin:2mm auto}
+.qr span{font-family:Barlow,sans-serif;font-size:8.5pt;letter-spacing:.14em;text-transform:uppercase;color:#55697d}
+.qr b{display:block;font-family:'Playfair Display',serif;font-size:16pt}
+.qr code{font-family:'Courier Prime',monospace;font-size:8.6pt;color:#3a352c}
+.code{display:flex;align-items:center;gap:6mm;border:2.5px solid #1b3046;border-radius:2mm;padding:3mm 6mm;margin:4mm 0;background:rgba(255,255,255,.5)}
+.code span{font-family:Barlow,sans-serif;font-size:9pt;letter-spacing:.14em;text-transform:uppercase;color:#55697d}
+.code b{font-family:'Courier Prime',monospace;font-size:26pt;letter-spacing:.2em;color:#9a1f26}
+.code p{margin:0;font-size:9.6pt}
+.cal{display:grid;grid-template-columns:repeat(12,1fr);gap:1.4mm;margin:3mm 0}
+.cal i{font-style:normal;aspect-ratio:1;border:1px solid rgba(27,48,70,.45);border-radius:1mm;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:11pt;color:#1b3046;background:rgba(255,255,255,.45)}
+.cal i.x{background:#1b3046;color:#f3ecdc}
+.tg{background:rgba(255,255,255,.55);border:1px solid #6b6152;padding:5mm;margin:4mm 0;font-family:'Courier Prime',monospace;font-size:10.4pt;line-height:1.55}
+.tg .fxh{margin:-2mm 0 3mm}
+.faq dt{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12pt;color:#1b3046;margin-top:3.4mm}
+.faq dd{margin:.6mm 0 0;font-size:10pt;line-height:1.5}
+.two{display:grid;grid-template-columns:1.25fr 1fr;gap:8mm;align-items:start}
+.pc{background:#fbf6ea url(a/paper_hotel.jpg) center/cover;padding:6mm 7mm;box-shadow:0 2mm 6mm rgba(0,0,0,.25);transform:rotate(1.2deg);margin-top:6mm}
+.pc .lh-c{margin-bottom:3mm}.pc .lh-c .lh-logo{height:18mm}.pc .lh-c b{font-size:18pt}
+.pc p{font-size:10pt;font-style:italic}
+.shot{width:100%;border-radius:2mm;box-shadow:0 2mm 6mm rgba(0,0,0,.3);display:block}
+.sus{display:grid;grid-template-columns:repeat(6,1fr);gap:3mm;margin-top:2mm}
+.sus figure{margin:0;position:relative}.sus img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;filter:grayscale(.55) contrast(1.05);border:1px solid #1b3046}
+.sus figcaption{position:absolute;left:1mm;top:1mm;background:#1b3046;color:#fff;font-family:'Courier Prime',monospace;font-size:7.5pt;padding:0 1.2mm}
+.sealx{display:grid;grid-template-columns:92mm 1fr;gap:7mm;align-items:center;margin-top:2mm}
+.sx-p{position:relative;height:46mm;background:#fbf8ef;box-shadow:0 2mm 5mm rgba(0,0,0,.25),inset 0 -12mm 10mm -10mm rgba(0,0,0,.08);transform:rotate(-2deg);padding:5mm 6mm}
+.sx-l{height:1.6mm;background:rgba(0,0,0,.12);margin:2.6mm 0;border-radius:1mm}.sx-l.s{width:60%}
+.sx-b{position:absolute;left:-3mm;right:-3mm;top:17mm;height:13mm;display:flex;align-items:center;background:repeating-linear-gradient(90deg,rgba(154,36,32,.12) 0 4mm,#f6efdf 4mm 8mm);border:1px solid #9a2420;box-shadow:0 1mm 2mm rgba(0,0,0,.2)}
+.sx-b b{font-family:'Playfair Display',serif;font-size:14pt;color:#9a2420;padding:0 3mm;border-right:1px solid #9a2420}
+.sx-b span{white-space:nowrap;font-family:'Special Elite',monospace;font-size:6.3pt;letter-spacing:.06em;text-transform:uppercase;padding:0 2mm;flex:1}.sx-b i{font-family:Lora,serif;font-size:6.5pt;padding-right:2mm;color:#5a4a33}
+.sx-t{font-size:10pt}
+</style></head><body>
+
+<!-- Seite 1: Deckblatt -->
+<section class="pg cover"><div class="ph"></div><div class="gr"></div>
+ <div class="az">AZ. K1 2412/26</div>
+ <div class="tag" id="tag"></div>
+ <div class="in"><div class="k">Ein Krimi Adventskalender für zwei</div><h1>Zimmer 24</h1><div class="s">Mord im Berghotel Sternwand</div>
+  <div class="m"><img src="a/logo_polizei.png" alt=""><div><b>Einsatzmappe für die Spielleitung</b><span>Alles, was du zum Vorbereiten und Verschenken brauchst. Bitte zuerst lesen, dann die Unterlagen verteilen.</span></div></div></div>
+</section>
+
+<!-- Seite 2: Lagebild -->
+<section class="pg"><div class="no">Blatt 1</div>
+ <div id="lh1"></div>
+ <h2>Lagebild</h2>
+ <p>In der Nacht zum ersten Dezember schließt ein Schneesturm das Berghotel Sternwand ein. Die Passstraße ist verschüttet, die Seilbahn steht still. Am Morgen liegt der Hotelier Konrad Wendt tot in Suite 24. Spurensicherung, Notarzt und Verstärkung kommen nicht auf den Berg.</p>
+ <p>Ermittelt wird zu zweit, an vierundzwanzig Abenden, jeden Tag hinter einer neuen Tür. Jede Person spielt auf dem eigenen Handy eine eigene Rolle mit eigenen Räumen, Hinweisen und Unterlagen. Keine kommt allein weiter: Den Tagescode findet ihr nur, wenn ihr redet, vergleicht und kombiniert. Am Heiligabend schreibt ihr die Anklage und erlebt gemeinsam das Finale.</p>
+ <div class="roles">
+  <div class="role"><img src="a/a_suite.jpg" alt=""><div><span>Rolle A</span><b>Ermittlung vor Ort</b><p>Eigentlich im Urlaub, jetzt die einzige Polizei auf dem Berg. Durchsucht Zimmer, sichert Spuren mit Puder und Spurenlampe, knackt Schlösser und verhört die Verdächtigen.</p><p><i>Unterlagen A, 12 Seiten</i></p></div></div>
+  <div class="role"><img src="a/pb_buero.jpg" alt=""><div><span>Rolle B</span><b>Präsidium im Tal</b><p>Die einzige Verbindung nach draußen. Hat Datenbanken, Archive, Labor und Fax, sieht aber nichts vom Tatort. Prüft Spuren, gräbt in alten Akten und verschafft sich Zugang zu gesperrten Systemen.</p><p><i>Fallakte B, 14 Seiten</i></p></div></div>
+ </div>
+ <h3>Ausrüstung</h3>
+ <ul class="chk"><li>Zwei Handys oder Tablets mit Internet und aktuellem Browser</li><li>Ton an, mit Kopfhörern wird es noch dichter</li><li>Ein Drucker für zwei Stapel A4, am schönsten in Farbe</li><li>Schere und etwas Klebeband oder Klebestift</li><li>Telefon oder Videoanruf, falls ihr nicht im selben Raum seid</li><li>Pro Abend meist 15 bis 30 Minuten</li></ul>
+ <h3>Sechs Menschen im Haus. Alle haben etwas zu verbergen.</h3>
+ <div class="sus"><figure><img src="a/p_marlene.jpg" alt=""><figcaption>P 1</figcaption></figure><figure><img src="a/p_jonas.jpg" alt=""><figcaption>P 2</figcaption></figure><figure><img src="a/p_ilse.jpg" alt=""><figcaption>P 3</figcaption></figure><figure><img src="a/p_ahrens.jpg" alt=""><figcaption>P 4</figcaption></figure><figure><img src="a/p_tom.jpg" alt=""><figcaption>P 5</figcaption></figure><figure><img src="a/p_sophie.jpg" alt=""><figcaption>P 6</figcaption></figure></div>
+ <div class="ft"><span>Polizeipräsidium Hochtal · Kriminalpolizei K1 · frei erfundene Dienststelle</span><span>© KuhlesZeug · nur für den privaten Gebrauch</span></div>
+</section>
+
+<!-- Seite 3: Vorbereitung -->
+<section class="pg"><div class="no">Blatt 2</div>
+ <div id="lh2"></div>
+ <h2>Vorbereitung in fünf Schritten</h2>
+ <ol class="steps">
+  <li><b>Rollen verteilen.</b> Überlege, wer oben im Hotel ermittelt (Rolle A) und wer unten im Präsidium sitzt (Rolle B). Beide Rollen sind gleich wichtig und gleich lang.</li>
+  <li><b>Unterlagen drucken.</b> Druck die Datei Unterlagen A für Rolle A und die Datei Fallakte B für Rolle B, jeweils einseitig auf A4. Wähle beim Drucken „Tatsächliche Größe“ oder 100 Prozent, damit Ausweis und Karten die richtigen Maße haben.</li>
+  <li><b>Siegel anbringen.</b> Auf Seite 1 jedes Stapels stehen die Banderolen. Ausschneiden, jedes versiegelte Blatt einmal falten, Schrift nach innen, und die Banderole mit derselben Nummer darumkleben. Die App sagt später, wann welches Siegel gebrochen wird.</li>
+  <li><b>Dienstausweis fertig machen.</b> Bei Rolle A liegt der Dienstausweis bei, Blatt A2. Ausschneiden, in der Mitte falten, zusammenkleben. Name und Foto kommen dazu, in der App auch als Selfie.</li>
+  <li><b>Mappen übergeben.</b> Jede Person bekommt ihren Stapel und ihren Link oder QR Code von Blatt 3. Wer eine persönliche Botschaft für Heiligabend schreiben möchte, erstellt vorher die Geschenklinks auf Blatt 5.</li>
+ </ol>
+ <div class="two">
+  <div><h3>Was in den Stapeln steckt</h3><p>Offen auf den Tisch kommen Willkommensbrief, Ausweis und Verdächtigentafel (A) sowie Deckblatt und Zugangsblatt (B). Alles andere bleibt versiegelt: Belegungsplan, Dienstpläne, Briefe, Gutachten, Laborbefunde, Verhörkarten und die Anklageschrift.</p></div>
+  <div class="note">Nicht in die versiegelten Blätter schauen. Auch nicht ganz kurz. Das Hotel merkt so etwas. M. W.</div>
+ </div>
+ <h3>So sieht ein versiegeltes Blatt aus</h3>
+ <div class="sealx"><div class="sx-p"><div class="sx-l"></div><div class="sx-l s"></div><div class="sx-l"></div><div class="sx-l s"></div><div class="sx-b"><b>B3</b><span>Versiegelt · erst öffnen, wenn die App es sagt</span><i>Zimmer 24</i></div><div class="sx-l"></div><div class="sx-l s"></div></div>
+ <p class="sx-t">Gefaltet, Schrift nach innen, Banderole mit der passenden Nummer darum. So liegen die Blätter neben dem Handy, bis die App zum Beispiel sagt: „Öffne jetzt Umschlag B3“.</p></div>
+ <div class="ft"><span>Polizeipräsidium Hochtal · Kriminalpolizei K1 · frei erfundene Dienststelle</span><span>© KuhlesZeug · nur für den privaten Gebrauch</span></div>
+</section>
+
+<!-- Seite 4: Zugang -->
+<section class="pg"><div class="no">Blatt 3</div>
+ <div id="lh3"></div>
+ <h2>Zugang zur Ermittlung</h2>
+ <p>Jede Rolle hat ihren eigenen Zugang. Mit der Kamera scannen oder den Link im Browser öffnen, am besten auf dem Handy, auf dem auch gespielt wird.</p>
+ <div class="qrs">
+  <div class="qr"><span>Rolle A</span><b>Ermittlung vor Ort</b><img src="a/qr_a.png" alt=""><code>kuhleszeug.github.io/sternwand/?r=a</code></div>
+  <div class="qr"><span>Rolle B</span><b>Präsidium im Tal</b><img src="a/qr_b.png" alt=""><code>kuhleszeug.github.io/sternwand/?r=b</code></div>
+ </div>
+ <div class="code"><div><span>Zugangscode</span><br><b>STERNWAND</b></div><p>Einmal beim ersten Start eingeben. Danach tragt ihr eure Vornamen ein, und das Intro beginnt. Mit einem Geschenklink von Blatt 5 entfällt der Code, die Namen stehen dann schon drin.</p></div>
+ <h3>Wann öffnen sich die Türen?</h3>
+ <p>Jeden Tag um Mitternacht deutscher Zeit öffnet sich eine neue Tür, vom 1. bis zum 24. Dezember. Verpasste Abende lassen sich jederzeit nachholen, im Januar sind alle Türen offen. Am 24. Dezember wartet das Finale.</p>
+ <div class="cal">
+  <i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>10</i><i>11</i><i>12</i><i>13</i><i>14</i><i>15</i><i>16</i><i>17</i><i>18</i><i>19</i><i>20</i><i>21</i><i>22</i><i>23</i><i class="x">24</i>
+ </div>
+ <p>Der Spielstand wird im Browser des Handys gespeichert. Deshalb immer auf demselben Gerät und im selben Browser spielen und nicht im privaten Modus. Ein Konto braucht ihr nicht.</p>
+ <div class="ft"><span>Polizeipräsidium Hochtal · Kriminalpolizei K1 · frei erfundene Dienststelle</span><span>© KuhlesZeug · nur für den privaten Gebrauch</span></div>
+</section>
+
+<!-- Seite 5: Ein Abend -->
+<section class="pg"><div class="no">Blatt 4</div>
+ <div id="lh4"></div>
+ <h2>So läuft ein Abend</h2>
+ <ol class="steps">
+  <li><b>Tür öffnen.</b> Beide öffnen in ihrer App die Tür des Tages. Oben steht die Szene, auf Wunsch vorgelesen.</li>
+  <li><b>Umsehen.</b> Im Raumbild leuchten Stellen, die man antippen kann: Schubladen, Safes, Telefone, Rechner, Spuren. Manche Stellen öffnen ein versiegeltes Blatt aus der Mappe.</li>
+  <li><b>Telefonieren.</b> Was die eine Rolle findet, braucht fast immer die andere. Beschreibt euch gegenseitig, was ihr seht, lest Zahlen vor, vergleicht Uhrzeiten.</li>
+  <li><b>Tagescode finden.</b> Aus euren Puzzleteilen ergibt sich ein Wort oder eine Zahl. Beide tragen den Code in ihrer App ein.</li>
+  <li><b>Erkenntnis hören.</b> Ist der Code richtig, wird das Ergebnis verlesen und landet in den Ermittlungsnotizen. Damit geht es am nächsten Abend weiter.</li>
+ </ol>
+ <h3>Wenn ihr festhängt</h3>
+ <p>Unter jedem Tagescode gibt es Tipps, die sich nacheinander aufdecken lassen und Schritt für Schritt näher an die Lösung führen. Bei den Minispielen gibt es kein Scheitern: Verbogene Dietriche werden nachgelegt, und das Forensikwerkzeug startet nach jedem Fehlversuch neu, mit mehr Zeit.</p>
+ <h3>Kleine Ermittlerregeln</h3>
+ <ul class="chk"><li>Nur die Mappe der eigenen Rolle lesen</li><li>Versiegeltes erst öffnen, wenn die App es sagt</li><li>Auf der Verdächtigentafel mitschreiben</li><li>Nichts übereinander verraten, nur Fakten austauschen</li></ul>
+ <div class="ft"><span>Polizeipräsidium Hochtal · Kriminalpolizei K1 · frei erfundene Dienststelle</span><span>© KuhlesZeug · nur für den privaten Gebrauch</span></div>
+</section>
+
+<!-- Seite 6: Funkspruch -->
+<section class="pg"><div class="no">Blatt 5</div>
+ <div id="lh5"></div>
+ <h2>Ein Funkspruch für Heiligabend</h2>
+ <p>Wenn ihr am 24. Dezember den Fall gelöst habt, meldet sich das Lagezentrum noch einmal. Dort kann deine eigene Botschaft für die beiden stehen, mit deinem Namen darunter. Bis dahin ist sie unsichtbar, auch im Link kann sie niemand lesen.</p>
+ <div class="two">
+  <div><ol class="steps">
+   <li><b>Seite öffnen.</b> QR Code scannen oder den Link aufrufen.</li>
+   <li><b>Namen und Botschaft eintragen.</b> Wer ist oben im Hotel, wer im Präsidium, was sollen sie lesen, und wie unterschreibst du.</li>
+   <li><b>Links verschicken.</b> Du bekommst zwei Geschenklinks mit QR Code, einen pro Person. Per Nachricht verschicken oder ausdrucken und in die Mappe legen.</li>
+  </ol></div>
+  <div class="qr"><span>Funkspruch erstellen</span><b>Lagezentrum Hochtal</b><img src="a/qr_funk.png" alt=""><code>kuhleszeug.github.io/sternwand/nachricht.html</code></div>
+ </div>
+ <div class="tg"><div class="fxh"><span>24.12. 18:00</span><span>LAGEZENTRUM HOCHTAL</span><span>AN ERMITTLERTEAM</span><span>S.01/01</span></div>
+  Beispiel: Ihr zwei seid das beste Team, das ich kenne. Vierundzwanzig Abende, ein Fall, keine einzige Lüge, die euch durchgerutscht ist. Frohe Weihnachten! Dein Weihnachtsmann</div>
+ <p>Die Geschenklinks ersetzen die normalen Links von Blatt 3. Auch wer schon angefangen hat, kann den Geschenklink später noch öffnen. Der Spielstand bleibt erhalten, die Botschaft kommt dazu.</p>
+ <div class="ft"><span>Polizeipräsidium Hochtal · Lagezentrum · frei erfundene Dienststelle</span><span>© KuhlesZeug · nur für den privaten Gebrauch</span></div>
+</section>
+
+<!-- Seite 7: Fragen und Gruß -->
+<section class="pg hotel"><div class="no">Blatt 6</div>
+ <div id="lh6"></div>
+ <h2>Häufige Fragen</h2>
+ <dl class="faq">
+  <dt>Der Tagescode wird nicht angenommen.</dt><dd>Groß und Kleinschreibung ist egal, Umlaute dürfen auch als AE, OE und UE geschrieben werden. Vergleicht noch einmal eure Funde, oft fehlt nur ein Puzzleteil der anderen Rolle.</dd>
+  <dt>Wir hören nichts.</dt><dd>Lautlos Schalter am Handy prüfen und in der App den Ton einschalten. Szenen und Anrufe starten erst nach einem Tippen.</dd>
+  <dt>Der Spielstand ist weg.</dt><dd>Wahrscheinlich wurde ein anderer Browser, ein anderes Gerät oder der private Modus genutzt. Gelöste Türen lassen sich mit dem bekannten Code sofort wieder öffnen.</dd>
+  <dt>Was passiert mit dem Selfie im Ausweis?</dt><dd>Das Foto bleibt nur auf dem eigenen Handy. Es wird nicht hochgeladen und nirgendwohin geschickt. In der App lässt es sich jederzeit wieder entfernen.</dd>
+  <dt>Können wir auch an verschiedenen Orten spielen?</dt><dd>Ja. Dafür ist das Spiel gemacht. Ein Anruf oder Videoanruf reicht, die Unterlagen hat ja jede Person selbst.</dd>
+  <dt>Wir haben eine Frage, die hier nicht steht.</dt><dd>Schreib uns einfach über Etsy, wir antworten gern.</dd>
+ </dl>
+ <div class="pc"><div class="lh-c sm"><img class="lh-logo" src="a/logo_hotel.png" alt=""><b>Berghotel Sternwand</b><span>Familie Wendt · seit 1961 · Hochtal 1</span></div>
+  <p>Liebe Gäste, wir freuen uns auf euch. Packt warme Socken ein, das Turmzimmer ist hergerichtet, und der Kachelofen brennt. Nur eines können wir nicht versprechen: dass es ruhige Tage werden.</p>
+  <div class="sig-row" style="justify-content:space-between"><div id="sg1"></div><div id="st1"></div></div></div>
+ <div class="ft"><span>Zimmer 24 · Mord im Berghotel Sternwand · alle Personen und Orte sind frei erfunden</span><span>© KuhlesZeug · nur für den privaten Gebrauch</span></div>
+</section>
+
+<script src="brand.js?v=9"></script>
+<script>
+const AZ='K1 2412/26';
+document.getElementById('tag').innerHTML=BR.box({k:'Polizeipräsidium Hochtal',t:'Vertraulich',d:'ZUERST LESEN',f:'dann verschenken',c:'red',r:0});
+const L=(t,refs)=>BR.lh('kripo',{dept:'Kommissariat 1 · Einsatzleitung',refs});
+document.getElementById('lh1').innerHTML=L(0,[['Aktenzeichen',AZ],['Betreff','Einweisung Spielleitung'],['Verteiler','Rolle A, Rolle B'],['Blatt','1 von 6']]);
+document.getElementById('lh2').innerHTML=L(0,[['Aktenzeichen',AZ],['Betreff','Vorbereitung der Unterlagen'],['Blatt','2 von 6']]);
+document.getElementById('lh3').innerHTML=L(0,[['Aktenzeichen',AZ],['Betreff','Zugänge und Zeitplan'],['Blatt','3 von 6']]);
+document.getElementById('lh4').innerHTML=L(0,[['Aktenzeichen',AZ],['Betreff','Ablauf der Ermittlung'],['Blatt','4 von 6']]);
+document.getElementById('lh5').innerHTML=BR.lh('kripo',{dept:'Lagezentrum',refs:[['Aktenzeichen',AZ],['Betreff','Funkspruch Heiligabend'],['Blatt','5 von 6']]});
+document.getElementById('lh6').innerHTML=L(0,[['Aktenzeichen',AZ],['Betreff','Fragen und Störungen'],['Blatt','6 von 6']]);
+document.getElementById('sg1').innerHTML=BR.sig('Marlene Wendt',{s:'Marlene Wendt',role:'für das Berghotel Sternwand'});
+document.getElementById('st1').innerHTML=BR.seal({top:'Berghotel Sternwand',bot:'Hochtal · seit 1961',img:'a/logo_hotel.png',c:'violet',r:-10,size:96});
+// Unterschrift der Einsatzleitung auf Blatt 4
+document.querySelectorAll('.pg')[4].querySelector('.ft').insertAdjacentHTML('beforebegin','<div class="sig-row" style="position:absolute;left:16mm;right:16mm;bottom:20mm;justify-content:space-between">'+BR.sig('Hans Pfeifer',{s:'Pfeifer',role:'Kriminaloberrat, Leiter K1'})+BR.seal({top:'Polizeipräsidium Hochtal',bot:'Kriminalpolizei · K1',img:'a/logo_polizei.png',c:'blue',r:-8,size:100})+'</div>');
+</script>
+</body></html>
