@@ -126,7 +126,7 @@ window.ARCHIV=[
  {a:'Sophie Lang',d:'2016-02-09',dd:'09.02.2016',r:'Reportage',t:'Die letzten Bergbauern',k:'Landwirtschaft',x:'Drei Höfe sind im Hochtal geblieben. Ein Besuch bei Familien, die nicht aufgeben.'},
  {a:'Sophie Lang',d:'2014-11-22',dd:'22.11.2014',r:'Reportage',t:'Wenn der Berg ruft',k:'Bergwacht Rettung',x:'Eine Nacht mit der Bergwacht Hochtal, von der Alarmierung bis zum Morgengrauen.'},
  {a:'Sophie Lang',d:'2014-03-14',dd:'14.03.2014',r:'Reportage',t:'Schnee von gestern',k:'Skilift Dorf',x:'Wie ein Dorf im Hochtal seinen alten Schlepplift rettet, mit Kuchenverkauf, Skibasar und sehr viel Sturheit. Die erste Reportage unserer neuen Mitarbeiterin, ausgezeichnet mit dem Nachwuchspreis des Hochtaler Boten.'},
- {a:'Sophia Lange',d:'2013-01-17',dd:'17.01.2013',r:'Bericht',t:'Nachtschicht im Pistenbully',k:'Piste',x:'Unterwegs mit einem Pistenfahrer, wenn alle anderen schlafen.'},
+ {a:'Sophia Lange',d:'2013-01-17',dd:'17.01.2013',r:'Bericht',t:'Nachtschicht im Schneeraupe',k:'Piste',x:'Unterwegs mit einem Pistenfahrer, wenn alle anderen schlafen.'},
  {a:'Sophia Lange',d:'2011-12-08',dd:'08.12.2011',r:'Bericht',t:'Ski heil im Hochtal',k:'Saisonstart',x:'Pünktlich zum zweiten Advent laufen die Lifte. Ein Rundgang zum Saisonstart.'},
  {a:'Redaktion',d:'2026-11-28',dd:'28.11.2026',r:'Lokales',t:'Sturmwarnung für das Hochtal',k:'Wetter Sturm',x:'Der Wetterdienst warnt für Montag vor Orkanböen und starkem Schneefall. Die Straße ins Hochtal könnte gesperrt werden.'}];
 })();

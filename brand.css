@@ -1,0 +1,200 @@
+/* Markenauftritt: Papier, Briefköpfe, Stempel, Unterschriften, Ausweis */
+.sheet{position:relative;max-width:600px;margin:0 auto;padding:22px 24px 16px;color:#1d1a15;font-family:Lora,serif;font-size:14px;line-height:1.5;border-radius:2px;box-shadow:0 14px 34px rgba(0,0,0,.45);text-align:left;overflow:hidden;background-color:#f3efe6;background-size:cover;background-position:center}
+.sheet p{margin:7px 0}
+.pp-hotel{background-color:#f7f1e2;background-image:url(a/paper_hotel.jpg)}
+.pp-office,.pp-akte{background-color:#f1efe9;background-image:url(a/paper_amt.jpg)}
+.pp-akte{background-color:#e9dcc0;background-image:linear-gradient(rgba(233,214,176,.55),rgba(222,200,158,.55)),url(a/paper_amt.jpg)}
+.pp-thin{background-color:#ede8dc;background-image:linear-gradient(rgba(240,236,226,.6),rgba(230,224,210,.6)),url(a/paper_amt.jpg)}
+.pp-old{background-color:#efe3c6;background-image:linear-gradient(rgba(230,206,160,.45),rgba(214,186,136,.5)),url(a/paper_amt.jpg)}
+.sheet.slipw{max-width:420px;transform:rotate(-.8deg)}
+/* Briefkopf */
+.lh{margin-bottom:12px}
+.lh-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding-bottom:9px;border-bottom:1.5px solid var(--bc,#2a1d10)}
+.lh-logo{height:62px;width:auto;display:block}
+.lh-logo.sm{height:40px}.lh-logo.xs{height:22px;vertical-align:middle;margin-right:5px;display:inline-block}.lh-logo.big{height:104px;margin:0 auto 6px}
+.lh-mark{width:50px;height:50px;display:flex;align-items:center;justify-content:center;background:var(--bc,#333);color:#fff;border-radius:8px;flex:none}
+.lh-mark b{font-family:Barlow,Arial,sans-serif;font-weight:700;font-size:19px;letter-spacing:.02em}
+.lh-mark.xs{width:20px;height:20px;border-radius:4px;display:inline-flex;vertical-align:middle;margin-right:6px}.lh-mark.xs b{font-size:9px}
+.lh-mark.sm{width:38px;height:38px}
+.lh-n{min-width:0}
+.lh-n small{display:block;font-family:Barlow,Arial,sans-serif;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--bc2,#6b5a40)}
+.lh-n b{display:block;line-height:1.05;color:var(--bc,#20180f)}
+.lh-n span{display:block;font-family:Barlow,Arial,sans-serif;font-size:11.5px;color:#4b4338;margin-top:2px}
+.lh-a{font-family:Barlow,Arial,sans-serif;font-size:10px;line-height:1.4;color:#4b4338;text-align:right;white-space:nowrap}
+.lh-refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:4px 14px;margin:10px 0 4px;font-family:Barlow,Arial,sans-serif}
+.lh-refs span{display:block;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#7a7060}
+.lh-refs b{font-size:12.5px;font-weight:600}
+.lh-t{font-family:'Playfair Display',serif;font-weight:800;font-size:22px;line-height:1.2;margin-top:12px}
+.lh-m{font-size:13px;color:#5a4a33}
+.lh-ft{margin-top:16px;padding-top:6px;border-top:1px solid rgba(0,0,0,.25);font-family:Barlow,Arial,sans-serif;font-size:9px;line-height:1.4;color:#6a6152;letter-spacing:.02em}
+/* Absender im Einzelnen */
+.lh-hotel{--bc:#23392c;--bc2:#9a7a3a}
+.lh-hotel .lh-top{border-bottom:1px solid #a8823c;box-shadow:0 3px 0 -2px #a8823c}
+.lh-hotel .lh-n b{font-family:'Playfair Display',serif;font-style:italic;font-weight:800;font-size:25px}
+.lh-kripo{--bc:#1b3046;--bc2:#55697d}
+.lh-kripo .lh-top{border-bottom:3px solid #1b3046;box-shadow:0 5px 0 -3px #8fa1b1}
+.lh-kripo .lh-n b{font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-weight:700;font-size:27px;text-transform:uppercase;letter-spacing:.05em}
+.lh-kripo .lh-t{font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-weight:700;font-size:24px;letter-spacing:.02em;color:#1b3046}
+.lh-gemeinde{--bc:#2c4a2b;--bc2:#6a7a55}
+.lh-gemeinde .lh-n b{font-family:'Playfair Display',serif;font-weight:800;font-size:23px}
+.lh-bank{--bc:#6d1f2a;--bc2:#8d5a60}
+.lh-bank .lh-mark{border-radius:50% 50% 8px 8px;background:linear-gradient(160deg,#8d2a38,#5a1822)}
+.lh-bank .lh-n b{font-family:Barlow,Arial,sans-serif;font-weight:700;font-size:23px;letter-spacing:-.01em}
+.lh-klinik{--bc:#16625d;--bc2:#4f8a85}
+.lh-klinik .lh-mark{border-radius:50%;background:#16625d}.lh-klinik .lh-mark b{font-size:34px;font-weight:600;line-height:1}
+.lh-klinik .lh-n b{font-family:Barlow,Arial,sans-serif;font-weight:600;font-size:22px}
+.lh-gruber{--bc:#b5401a;--bc2:#8a5a40}
+.lh-gruber .lh-mark{transform:skewX(-10deg);border-radius:4px}
+.lh-gruber .lh-n b{font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-style:italic;font-weight:700;font-size:28px;text-transform:uppercase}
+.lh-notar{--bc:#3a3352;--bc2:#6d6587}
+.lh-notar .lh-mark{border-radius:50%;background:none;border:2px solid #3a3352;color:#3a3352}.lh-notar .lh-mark b{font-family:'Playfair Display',serif;font-size:24px}
+.lh-notar .lh-n b{font-family:'Playfair Display',serif;font-weight:600;font-size:22px;font-variant:small-caps}
+.lh-bergschule{--bc:#2e5130}.lh-bergschule .lh-n b{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase}
+.lh-c{text-align:center;border-bottom:1px solid #a8823c;box-shadow:0 3px 0 -2px #a8823c;padding-bottom:10px;margin-bottom:14px}
+.lh-c b{display:block;font-family:'Playfair Display',serif;font-style:italic;font-weight:800;font-size:28px;color:#23392c}
+.lh-c span{display:block;font-family:Barlow,Arial,sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#9a7a3a}
+.lh-c.sm .lh-logo{height:56px;margin:0 auto 4px}.lh-c.sm b{font-size:21px}
+/* Tinte */
+.ink-blue{color:#26407c}.ink-red{color:#a3242b}.ink-violet{color:#5a3a87}.ink-green{color:#2e5c39}.ink-black{color:#262422}
+.seal-st{display:inline-block;flex:none;mix-blend-mode:multiply;opacity:.86;vertical-align:middle}
+.box-st{display:inline-flex;flex-direction:column;align-items:center;gap:1px;border:2.5px solid currentColor;outline:1px solid currentColor;outline-offset:2px;padding:4px 12px;font-family:'Barlow Condensed',Arial Narrow,sans-serif;text-transform:uppercase;letter-spacing:.09em;filter:url(#ink);mix-blend-mode:multiply;opacity:.85;line-height:1.1;margin:6px 4px;vertical-align:middle;background:none}
+.box-st b{font-size:20px;font-weight:700}.box-st i{font-style:normal;font-size:10px;font-weight:600}
+.box-st .bx-d{font-family:'Courier Prime','Special Elite',monospace;font-weight:700;font-size:14px;letter-spacing:.06em}
+.sig-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 22px;margin-top:12px}
+.sig-b{min-width:150px;position:relative}
+.sig{display:inline-block;font-family:'Herr Von Muellerhoff',cursive;font-size:42px;line-height:1;padding:0 6px;transform-origin:left bottom;opacity:.92;white-space:nowrap}
+.sig-l{border-top:1px solid #5a5040;margin-top:-6px}
+.sig-n{font-family:Barlow,Arial,sans-serif;font-size:10.5px;color:#4b4338;margin-top:2px}.sig-n small{font-size:9.5px;color:#7a7060}
+.para{font-family:Caveat,cursive;font-weight:700;font-size:17px;line-height:1;display:inline-block;transform:rotate(-6deg)}
+.fxh{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-family:'Courier Prime','Special Elite',monospace;font-size:10px;letter-spacing:.05em;color:#3a3a3a;opacity:.75;border-bottom:1px dotted #777;margin:-12px -10px 12px;padding:0 2px 3px}
+.bc{position:relative;display:inline-block;vertical-align:middle}.bc i{position:absolute;top:0;bottom:0;background:#141414}
+.punch{display:none}
+.coffee{position:absolute;pointer-events:none;background:url(a/kaffeerand.png) center/contain no-repeat;mix-blend-mode:multiply;opacity:.5}
+.postit{background:#f6e27a;box-shadow:0 6px 14px rgba(0,0,0,.3);padding:10px 14px;max-width:320px;margin:14px 0 0 auto;transform:rotate(1.5deg)}
+.postit .hwr{margin:4px 0}
+/* Tabellen in Hotelfarben */
+.dt.hotel th{background:#23392c;color:#f3e7c9}
+.dt.bank th{background:#6d1f2a;color:#fff}
+.dt.book{font-family:Lora,serif}.dt.book td{border-bottom:1px solid rgba(60,80,130,.25)}
+.dt.hwt td{font-family:Caveat,cursive;font-size:18px;color:#1d2a4a;line-height:1.1}
+.dt.hwt td:first-child{font-family:Lora,serif;font-size:13px;color:#2a1d10}
+.kb-h,.wb-h2{display:flex;align-items:center;gap:10px;border-bottom:2px solid #23392c;padding-bottom:6px;margin-bottom:8px}
+.kb-h b,.wb-h2 b{display:block;font-family:'Playfair Display',serif;font-size:22px}.kb-h span,.wb-h2 span{font-size:12px;color:#5a4a33}
+.kb-h i,.wb-h2 i{margin-left:auto;font-family:'Courier Prime',monospace;font-size:11px;color:#6b5a40;font-style:normal}
+/* Akte Deckblatt */
+.cv2{margin-top:8px}
+.cv2-k{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.3em;text-transform:uppercase;font-size:14px;color:#1b3046;text-align:center;margin-top:8px}
+.cv2-no{font-family:'Courier Prime','Special Elite',monospace;font-weight:700;font-size:56px;letter-spacing:.06em;text-align:center;line-height:1.1;border:3px solid #1b3046;border-radius:6px;margin:6px auto;padding:2px 14px;width:max-content;background:rgba(255,255,255,.35)}
+.cv2-b{text-align:center;font-family:'Playfair Display',serif;font-size:18px;margin-bottom:12px}
+.cv2-g{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;border-top:1px solid #1b3046;border-bottom:1px solid #1b3046;padding:10px 0}
+.cv2-g span,.cv2-r span,.cv2-i span{display:block;font-family:Barlow,sans-serif;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#55697d}
+.cv2-g b{display:block;font-size:15px}.cv2-g i{font-size:12px;color:#4b4338}
+.cv2-r{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:14px 0}.cv2-r .wl{width:100%}
+.cv2-f{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:8px}
+.cv2-bc{display:flex;flex-direction:column;align-items:center;font-family:'Courier Prime',monospace;font-size:10px}
+/* Willkommensbrief */
+.letter2{font-size:14px}.l2-d{text-align:right;font-style:italic;color:#4b4338}
+.l2-ps{font-size:12.5px;color:#4b4338;font-style:italic;margin-top:12px}
+/* Urkunde */
+.urk2{padding:10px;background:#f6f0dd;border-radius:4px;box-shadow:0 14px 30px rgba(0,0,0,.45);max-width:560px;margin:0 auto;color:#1d1a15;
+ background-image:repeating-radial-gradient(circle at 50% 50%,rgba(44,74,43,.07) 0 1px,transparent 1px 7px),url(a/paper_amt.jpg);background-size:auto,cover}
+.urk2-in{border:3px double #2c4a2b;outline:1px solid rgba(44,74,43,.5);outline-offset:-9px;padding:18px 20px;position:relative;text-align:center}
+.urk2-h{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px}.urk2-h img{height:64px}
+.urk2-h small{display:block;font-family:Barlow,sans-serif;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#6a7a55}
+.urk2-h b{display:block;font-family:'Playfair Display',serif;font-size:22px}.urk2-h span{font-size:11px;color:#4b4338}
+.urk2-v{font-size:12.5px;margin:12px 0 4px;color:#3a352c}
+.urk2-f{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:10px;text-align:left}
+.urk2-fee{font-family:Barlow,sans-serif;font-size:10px;text-align:center;border:1px solid #777;padding:4px 8px;line-height:1.3}.urk2-fee b{display:block;font-size:13px}
+.urk2-no{font-family:'Courier Prime',monospace;font-size:10px;color:#6a6152;margin-top:8px}
+/* Bericht 1999 */
+.lh99{display:flex;gap:12px;align-items:center;font-family:'Special Elite',monospace;border-bottom:1.5px solid #333;padding-bottom:6px;margin-bottom:10px}
+.lh99 img{height:56px;filter:grayscale(1) contrast(1.2);opacity:.85}
+.lh99 b{display:block;font-size:17px;letter-spacing:.14em}.lh99 span{display:block;font-size:11px;letter-spacing:.06em}
+.t99{font-family:'Special Elite',monospace;margin-bottom:8px}.t99 b{display:block;font-size:16px;text-decoration:underline}.t99 span{font-size:12px}
+.rp-ss{display:flex;align-items:center;gap:12px;margin-top:10px}
+/* Brief Sophie */
+.br9{position:relative}
+.br9-h2{border-bottom:1px solid #222;padding-bottom:6px;margin-bottom:10px}
+.br9-h2 b{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;letter-spacing:.32em;text-transform:uppercase;line-height:1}
+.br9-h2 span{font-family:Barlow,sans-serif;font-size:11px;letter-spacing:.08em;color:#555}
+.br9-f{font-family:Barlow,sans-serif;font-size:11px;color:#555;margin-top:8px}
+/* Verhör */
+.vk10-k{display:flex;align-items:center;gap:6px;font-family:Barlow,sans-serif;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#1b3046;border-bottom:2px solid #1b3046;padding-bottom:4px;margin-bottom:8px}
+.vk10-k i{margin-left:auto;font-style:normal;font-family:'Courier Prime',monospace}
+.tf-p{position:relative}.tf-p span{position:absolute;left:3px;top:3px;background:#1b3046;color:#fff;font-family:'Courier Prime',monospace;font-size:10px;padding:0 4px}
+.ak-st{border:1.5px dashed #8fa1b1;border-radius:50%;width:96px;height:96px;display:flex;align-items:center;justify-content:center;font-family:Barlow,sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#8fa1b1}
+.as2 td{vertical-align:middle}
+/* Dienstausweis */
+.idc2w{display:flex;flex-direction:column;gap:12px;align-items:center}
+.idc2-f,.idc2-b{position:relative;width:100%;max-width:440px;aspect-ratio:85.6/54;border-radius:14px;overflow:hidden;color:#0f2233;container-type:inline-size;box-shadow:0 10px 26px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.4);
+ background:linear-gradient(125deg,#e9eef2 0%,#d6e1ea 38%,#e8ece6 60%,#cfdbe5 100%)}
+.idc2-g{position:absolute;inset:0;opacity:.55;pointer-events:none;
+ background:repeating-radial-gradient(ellipse at 78% 40%,transparent 0 5px,rgba(31,70,110,.18) 5px 5.6px),repeating-radial-gradient(ellipse at 20% 120%,transparent 0 7px,rgba(140,60,90,.12) 7px 7.6px),repeating-linear-gradient(115deg,transparent 0 3px,rgba(20,60,100,.05) 3px 4px)}
+.idc2-g.b{opacity:.4}
+.idc2-hd{position:relative;display:flex;align-items:center;gap:2.6cqw;background:linear-gradient(90deg,#16304a,#24486a);color:#eef3f7;padding:2cqw 3.6cqw;height:16cqw;box-sizing:border-box}
+.lh-logo.id{height:12cqw;filter:drop-shadow(0 0 1px rgba(255,255,255,.6))}
+.idc2-o small{display:block;font-family:Barlow,sans-serif;font-size:2.4cqw;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.idc2-o b{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:5.4cqw;letter-spacing:.06em;text-transform:uppercase;line-height:1}
+.idc2-ty{margin-left:auto;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:3cqw;letter-spacing:.14em;text-transform:uppercase;text-align:right;line-height:1.05;border-left:1px solid rgba(255,255,255,.4);padding-left:2.4cqw}
+.idc2-bd{position:relative;display:grid;grid-template-columns:20cqw 1fr;gap:3.4cqw;padding:3cqw 3.6cqw 0}
+.idc2-ph{position:relative;width:20cqw;aspect-ratio:4/5;border-radius:1.4cqw;overflow:hidden;background:#c9d3dc;box-shadow:inset 0 0 0 1px rgba(15,34,51,.3)}
+.idc2-ph img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.35) contrast(1.06) sepia(.1)}
+.idc2-ph0{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;font-family:Barlow,sans-serif;font-size:2.8cqw;letter-spacing:.1em;text-transform:uppercase;color:#5a6b78;border:1.5px dashed #6b7d8b;border-radius:1.4cqw}
+.idc2-ph0 small{font-size:2.2cqw;letter-spacing:0;text-transform:none}
+.idc2-holo{position:absolute;right:-3cqw;bottom:-3cqw;width:13cqw;height:13cqw;border-radius:50%;background:conic-gradient(from 0deg,#f5b8d6,#b8e3f5,#c7f5b8,#f5ecb8,#f5b8d6);mix-blend-mode:screen;opacity:.65;animation:holo 6s linear infinite}
+@keyframes holo{50%{filter:hue-rotate(120deg) brightness(1.15)}}
+.idc2-fd{font-family:Barlow,sans-serif;min-width:0}
+.idc2-fd span{display:block;font-size:2.2cqw;letter-spacing:.14em;text-transform:uppercase;color:#4d6475;margin-top:.6cqw}
+.idc2-fd b{display:block;font-weight:600;font-size:3.7cqw;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.idc2-fd b.nm{font-family:'Courier Prime','Special Elite',monospace;font-weight:700;font-size:4.4cqw;border-bottom:1px solid rgba(15,34,51,.35);min-height:5cqw}
+.idc2-fd b.big{font-family:'Courier Prime',monospace;font-weight:700;font-size:5.4cqw;letter-spacing:.08em;color:#9a1f26}
+.idc2-2{display:flex;gap:4cqw}.idc2-2>div{min-width:0}
+.idc2-st{position:absolute;left:15cqw;top:26cqw;pointer-events:none}
+.idc2-st .seal-st{width:13cqw!important;height:13cqw!important;opacity:.6}
+.idc2-sg{position:absolute;left:3.6cqw;right:3.6cqw;bottom:9.4cqw;display:flex;align-items:flex-end;gap:2cqw;font-family:Barlow,sans-serif}
+.idc2-sg .sig{font-size:7cqw;padding:0;min-width:22cqw;border-bottom:1px solid rgba(15,34,51,.4)}
+.idc2-sg i{font-style:normal;font-size:2cqw;color:#4d6475;text-transform:uppercase;letter-spacing:.1em}
+.idc2-sg em{margin-left:auto;font-style:normal;font-family:'Courier Prime',monospace;font-size:2.4cqw;color:#4d6475}
+.idc2-mrz{position:absolute;left:0;right:0;bottom:0;height:8.4cqw;background:rgba(255,255,255,.55);font-family:'Courier Prime',monospace;font-size:2.9cqw;line-height:1.35;letter-spacing:.14em;padding:.8cqw 3.6cqw;box-sizing:border-box;color:#1a2a36;white-space:nowrap;overflow:hidden}
+.idc2-b{padding:4cqw 4.4cqw;box-sizing:border-box;font-family:Barlow,sans-serif}
+.idc2-b p{position:relative;font-size:2.8cqw;line-height:1.45;margin:0 0 2cqw}
+.idc2-br{position:relative;display:flex;align-items:center;gap:3cqw}.idc2-br .seal-st{width:15cqw!important;height:15cqw!important}
+.idc2-br .sig{font-size:7.4cqw;padding:0}.idc2-br i{display:block;font-style:normal;font-size:2.2cqw;color:#4d6475;border-top:1px solid #8aa;padding-top:.4cqw}
+.idc2-bf{position:absolute;left:4.4cqw;right:4.4cqw;bottom:3cqw;display:flex;gap:3cqw;align-items:center}.idc2-bf small{font-size:2.1cqw;line-height:1.3;color:#4d6475}
+.idc2w.pr{flex-direction:row;gap:0}
+.idc2w.pr .idc2-f,.idc2w.pr .idc2-b{width:85.6mm;max-width:none;border-radius:3.5mm;box-shadow:none;border:.3mm solid #9aa}
+.idc-cam{display:flex;flex-direction:column;align-items:center;gap:10px}
+.idc-cam .cv{position:relative;width:min(78vw,300px);aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:#000}
+.idc-cam video,.idc-cam canvas{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block}
+.idc-cam .ov{position:absolute;inset:8% 16% 14%;border:2px dashed rgba(255,255,255,.75);border-radius:50% 50% 46% 46%;box-shadow:0 0 0 999px rgba(0,0,0,.35);pointer-events:none}
+.mod.idm{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border-radius:16px;padding:14px}
+.mod.idm .idm-h{font-family:'Special Elite',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#d7b56d;margin-bottom:8px}
+.mod.idm .idm-b{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.mod.idm .idm-n{font-size:12.5px;opacity:.8;text-align:center;margin-top:8px}
+/* Druck */
+.pg .sheet{max-width:none;margin:0;padding:0;box-shadow:none;background:none!important;overflow:visible;font-size:11.5pt;position:static}
+.pg .lh-logo{height:22mm}.pg .lh-logo.big{height:34mm}.pg .lh-logo.sm{height:14mm}
+.pg .lh-n b{font-size:26pt}.pg .lh-kripo .lh-n b{font-size:28pt}.pg .lh-a{font-size:8.5pt}
+.pg .lh-t{font-size:20pt}.pg .lh-ft{position:absolute;left:15mm;right:15mm;bottom:15mm;font-size:7.5pt}
+.pg .punch{display:block;position:absolute;left:6mm;width:5.5mm;height:5.5mm;border-radius:50%;background:#fff;box-shadow:inset 0 .5mm 1mm rgba(0,0,0,.35)}
+.pg .punch.p1{top:118mm}.pg .punch.p2{top:198mm}
+.pg .fxh{margin:-6mm 0 5mm;font-size:8.5pt}
+.pg .urk2{box-shadow:none;max-width:none}.pg .urk2-in{padding:12mm 14mm}
+.pg .cv2-no{font-size:48pt}
+/* Urkunde */
+.ur2{background:#f4eedd url(a/paper_amt.jpg) center/cover;color:#2a1d10;border-radius:4px;padding:12px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.ur2-in{border:5px double #1b3046;outline:1px solid #a8823c;outline-offset:-10px;padding:22px 18px;text-align:center}
+.ur2-logo{height:84px;display:block;margin:0 auto 6px}
+.ur2-k{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#1b3046}
+.ur2-ns .ur-n{display:flex;flex-direction:column;align-items:center}
+.ur2-ph{width:72px;height:90px;object-fit:cover;border:2px solid #1b3046;margin-bottom:6px;filter:grayscale(.3) sepia(.15)}
+.ur2-f{display:flex;align-items:flex-end;justify-content:space-around;gap:10px;margin-top:16px;text-align:left}
+.ur2-az{font-family:'Courier Prime',monospace;font-size:11px;color:#55697d;margin-top:12px}
+@media (max-width:540px){
+ .sheet{padding:18px 16px 12px;font-size:13.5px}
+ .lh-top{grid-template-columns:auto 1fr}.lh-a{display:none}
+ .lh-n b{font-size:22px!important}.lh-logo{height:52px}
+ .as2 th:last-child,.as2 td:last-child{display:none}
+ .cv2-no{font-size:40px}
+}
+.idc2-ph0{font-size:2.3cqw}

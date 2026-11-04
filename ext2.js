@@ -3,24 +3,29 @@
 const S=(k,...a)=>{try{AMBI.sfx[k]&&AMBI.sfx[k](...a)}catch(e){}};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
-// Wischfläche: Spiegel freiwischen oder Puder verteilen
-function wipe(c,img,mode,onPct){const g=c.getContext('2d');const r=c.getBoundingClientRect();c.width=r.width*2;c.height=r.height*2;
- const fill=()=>{if(mode==='fog'){g.globalCompositeOperation='source-over';const gr=g.createLinearGradient(0,0,0,c.height);gr.addColorStop(0,'rgba(236,240,242,.93)');gr.addColorStop(1,'rgba(214,222,226,.95)');g.fillStyle=gr;g.fillRect(0,0,c.width,c.height);for(let i=0;i<700;i++){g.fillStyle='rgba(255,255,255,'+(Math.random()*.25)+')';g.beginPath();g.arc(Math.random()*c.width,Math.random()*c.height,Math.random()*3+.5,0,7);g.fill()}}
-  else{g.globalCompositeOperation='source-over';g.drawImage(img,0,0,c.width,c.height);g.fillStyle='rgba(28,6,8,.88)';g.fillRect(0,0,c.width,c.height)}};
- fill();let down=false,last=null,ticks=0;
+// Wischfläche: Spiegel freiwischen oder Puder verteilen, Fortschritt wird gespeichert
+function wipe(c,img,mode,key,onPct){const g=c.getContext('2d');const r=c.getBoundingClientRect();c.width=r.width*2;c.height=r.height*2;
+ const fill=()=>{g.globalCompositeOperation='source-over';if(mode==='fog'){const gr=g.createLinearGradient(0,0,0,c.height);gr.addColorStop(0,'rgba(236,240,242,.94)');gr.addColorStop(1,'rgba(214,222,226,.96)');g.fillStyle=gr;g.fillRect(0,0,c.width,c.height);for(let i=0;i<700;i++){g.fillStyle='rgba(255,255,255,'+(Math.random()*.25)+')';g.beginPath();g.arc(Math.random()*c.width,Math.random()*c.height,Math.random()*3+.5,0,7);g.fill()}}
+  else{g.filter='blur(18px) brightness(.32) saturate(.7)';g.drawImage(img,-30,-30,c.width+60,c.height+60);g.filter='none';g.fillStyle='rgba(30,8,10,.45)';g.fillRect(0,0,c.width,c.height)}};
+ const saved=st.flag[key+'_m'];
+ if(saved){const im=new Image();im.onload=()=>{g.clearRect(0,0,c.width,c.height);g.drawImage(im,0,0,c.width,c.height)};fill();im.src=saved}else fill();
+ let down=false,last=null,ticks=0;
  const pt=e=>{const b=c.getBoundingClientRect();const p=e.touches?e.touches[0]:e;return [(p.clientX-b.left)*2,(p.clientY-b.top)*2]};
- const stroke=(a,b)=>{g.globalCompositeOperation='destination-out';g.lineCap='round';g.lineWidth=mode==='fog'?70:58;g.strokeStyle='rgba(0,0,0,'+(mode==='fog'?1:.45)+')';g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(b[0],b[1]);g.stroke()};
+ const stroke=(a,b)=>{g.globalCompositeOperation='destination-out';g.lineCap='round';g.lineWidth=mode==='fog'?90:130;g.strokeStyle='rgba(0,0,0,'+(mode==='fog'?1:.5)+')';g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(b[0],b[1]);g.stroke()};
  const pct=()=>{const d=g.getImageData(0,0,c.width,c.height).data;let n=0,t=0;for(let i=3;i<d.length;i+=64){t++;if(d[i]<60)n++}return n/t};
+ const store=()=>{try{const s=document.createElement('canvas');s.width=Math.round(c.width/3);s.height=Math.round(c.height/3);s.getContext('2d').drawImage(c,0,0,s.width,s.height);st.flag[key+'_m']=s.toDataURL('image/webp',.7);save()}catch(e){}};
  c.onpointerdown=e=>{down=true;last=pt(e);c.setPointerCapture(e.pointerId)};
  c.onpointermove=e=>{if(!down)return;const p=pt(e);stroke(last,p);last=p;if(++ticks%12===0){S(mode==='fog'?'paperSlide':'click');onPct(pct())}};
- c.onpointerup=()=>{down=false;onPct(pct())};
- return {refog:()=>{if(mode!=='fog')return;g.globalCompositeOperation='source-over';g.fillStyle='rgba(230,236,239,.035)';g.fillRect(0,0,c.width,c.height)}}}
+ c.onpointerup=()=>{down=false;onPct(pct());store()};
+ return {refog:()=>{if(mode!=='fog'||st.flag[key])return;g.globalCompositeOperation='source-over';g.fillStyle='rgba(230,236,239,.02)';g.fillRect(0,0,c.width,c.height)}}}
 
 Object.assign(window.OPEN_X,{
- fog(o){viewer('<div class="wp fogm"><div class="wp-ph" style="background-image:url('+o.img+')"><div class="wp-msg mirror">'+o.msg+'</div><canvas id="wp-c"></canvas></div><p class="v-cap" id="wp-cap">'+o.cap+'</p></div>');$('#v-body').classList.add('wide');
-  const w=wipe($('#wp-c'),null,'fog',p=>{if(p>.35)$('#wp-cap').textContent=o.done});const iv=setInterval(()=>{if(!$('#wp-c'))return clearInterval(iv);w.refog()},400)},
- powder(o){viewer('<div class="wp pw"><div class="wp-ph" style="background-image:url('+o.img+')"><div class="wp-lab" id="wp-lab">'+o.label+'</div><canvas id="wp-c"></canvas></div><p class="v-cap" id="wp-cap">'+o.cap+'</p></div>');$('#v-body').classList.add('wide');
-  const im=new Image();im.onload=()=>wipe($('#wp-c'),im,'powder',p=>{if(p>.45){$('#wp-lab').classList.add('on');$('#wp-cap').textContent=o.done}});im.src=o.img},
+ fog(o){const key='fog_'+curDay;viewer('<div class="wp fogm"><div class="wp-ph" style="background-image:url('+o.img+')"><div class="wp-msg mirror">'+o.msg+'</div><canvas id="wp-c"></canvas></div><p class="v-cap" id="wp-cap">'+(st.flag[key]?o.done:o.cap)+'</p></div>');$('#v-body').classList.add('wide');
+  if(st.flag[key]){$('#wp-c').remove();return}
+  const w=wipe($('#wp-c'),null,'fog',key,p=>{if(p>.35&&!st.flag[key]){st.flag[key]=1;save();$('#wp-cap').textContent=o.done;S('lock')}});const iv=setInterval(()=>{if(!$('#wp-c'))return clearInterval(iv);w.refog()},500)},
+ powder(o){const key='pw_'+curDay;viewer('<div class="wp pw"><div class="wp-ph" style="background-image:url('+o.img+')"><div class="wp-lab'+(st.flag[key]?' on':'')+'" id="wp-lab">'+o.label+'</div><canvas id="wp-c"></canvas></div><p class="v-cap" id="wp-cap">'+(st.flag[key]?o.done:o.cap)+'</p></div>');$('#v-body').classList.add('wide');
+  if(st.flag[key]){$('#wp-c').remove();return}
+  const im=new Image();im.onload=()=>wipe($('#wp-c'),im,'powder',key,p=>{if(p>.5&&!st.flag[key]){st.flag[key]=1;save();$('#wp-lab').classList.add('on');$('#wp-cap').textContent=o.done;const cv=$('#wp-c');cv.style.transition='opacity 1.2s';cv.style.opacity='0';setTimeout(()=>cv.remove(),1300)}});im.src=o.img},
 
  keypad(o){const key='kp_'+curDay;let v='';
   viewer('<div class="kp"><div class="kp-ph" style="background-image:url('+o.img+')"></div><div class="kp-box"><div class="kp-lcd" id="kp-lcd">'+(st.flag[key]?'OFFEN':'----')+'</div><div class="kp-g">'+['1','2','3','4','5','6','7','8','9','C','0','OK'].map(k=>'<button data-k="'+k+'">'+k+'</button>').join('')+'</div></div>'+(o.note?'<div class="kp-note">'+o.note+'</div>':'')+'<p class="v-cap" id="kp-cap">'+o.cap+'</p><div id="kp-out"></div></div>');$('#v-body').classList.add('wide');
@@ -52,9 +57,9 @@ Object.assign(window.OPEN_X,{
   $('#cc-go').onclick=async()=>{S('key');if(await kzSha('sw|cc|'+norm($('#cc-pin').value))===o.hash){st.flag[key]=1;save();S('boot');run()}else{SFX.no&&SFX.no();toast('Falsche PIN.')}}},
 
  tape(o){viewer('<div class="tp"><div class="tp-ph" style="background-image:url('+o.img+')"></div><div class="tp-dev"><div class="tp-cas"><i class="l"></i><i class="r"></i><span>Suite 24</span></div><div class="tp-lcd" id="tp-lcd">1 NACHRICHT · 23:51</div><div class="tp-row"><button class="btn sm" id="tp-play">Abspielen</button><button class="btn ghost sm" id="tp-rev">Rückwärts</button></div></div><p class="v-cap" id="tp-cap">'+o.cap+'</p><div class="au-script" id="tp-tx">'+o.script+'</div></div>');$('#v-body').classList.add('wide');
-  let rev=true;const a1=new Audio(o.rev),a2=new Audio(o.fwd);[a1,a2].forEach(a=>{a.preload='auto';a.onended=()=>{document.querySelector('.tp-cas').classList.remove('spin');AMBI.duck(false)}});
+  const tk='tape_'+curDay;let rev=!st.flag[tk];const a1=new Audio(o.rev),a2=new Audio(o.fwd);[a1,a2].forEach(a=>{a.preload='auto';a.onended=()=>{document.querySelector('.tp-cas').classList.remove('spin');AMBI.duck(false)}});
   const play=()=>{stopAudio();a1.pause();a2.pause();const a=rev?a1:a2;a.currentTime=0;curAudio=a;S('click');document.querySelector('.tp-cas').classList.add('spin');document.querySelector('.tp-cas').classList.toggle('back',!rev);AMBI.duck(true);a.play().catch(()=>{})};
-  $('#tp-play').onclick=play;$('#tp-rev').onclick=()=>{rev=!rev;$('#tp-rev').classList.toggle('on',!rev);$('#tp-lcd').textContent=rev?'1 NACHRICHT · 23:51':'1 NACHRICHT · 23:51 · RÜCKWÄRTS';if(!rev){$('#tp-cap').textContent=o.done;$('#tp-tx').classList.add('on')}play()}}
+  $('#tp-play').onclick=play;$('#tp-rev').onclick=()=>{rev=!rev;$('#tp-rev').classList.toggle('on',!rev);$('#tp-lcd').textContent=rev?'1 NACHRICHT · 23:51':'1 NACHRICHT · 23:51 · RÜCKWÄRTS';if(!rev){st.flag[tk]=1;save();$('#tp-cap').textContent=o.done;$('#tp-tx').classList.add('on')}play()};if(!rev){$('#tp-rev').classList.add('on');$('#tp-lcd').textContent='1 NACHRICHT · 23:51 · RÜCKWÄRTS';$('#tp-cap').textContent=o.done;$('#tp-tx').classList.add('on')}}
 });
 
 // Spa Buchungssystem

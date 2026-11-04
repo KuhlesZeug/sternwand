@@ -514,7 +514,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .wp-ph canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:pointer}
 .wp-msg{position:absolute;left:12%;right:12%;top:30%;text-align:center;font-family:'Caveat',cursive;font-size:clamp(30px,9vw,46px);line-height:1.15;color:rgba(255,255,255,.82);text-shadow:0 0 6px rgba(255,255,255,.5),0 2px 2px rgba(0,0,0,.25)}
 .wp-msg.mirror{transform:scaleX(-1) rotate(2deg)}
-.wp-lab{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%) scale(.9);display:flex;flex-direction:column;align-items:center;font-family:'Special Elite',monospace;color:rgba(255,255,255,.9);text-shadow:0 0 8px #000;opacity:0;transition:opacity 1s,transform 1s;z-index:2;pointer-events:none}
+.wp-lab{position:absolute;left:51%;top:62%;transform:translate(-50%,-50%) scale(.9);display:flex;flex-direction:column;align-items:center;font-family:'Special Elite',monospace;color:rgba(255,255,255,.9);text-shadow:0 0 8px #000;opacity:0;transition:opacity 1s,transform 1s;z-index:2;pointer-events:none}
 .wp-lab b{font-size:42px}.wp-lab span{letter-spacing:.3em;font-size:14px}.wp-lab.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .kp{display:flex;flex-direction:column;gap:12px;align-items:center}
 .kp-ph{width:100%;aspect-ratio:3/2;border-radius:12px;background-size:cover;background-position:center 40%}
@@ -526,8 +526,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .kp-g button:active{transform:translateY(2px);box-shadow:0 1px 0 #6e6a62}
 .kp-note{background:#ffe96b;color:#2a2410;font-family:'Caveat',cursive;font-size:22px;padding:10px 14px;transform:rotate(-3deg);box-shadow:0 6px 12px rgba(0,0,0,.4)}
 #kp-out{display:flex;flex-direction:column;gap:8px}
-.kt-ph{aspect-ratio:16/9;border-radius:12px;background-size:cover;background-position:center}
-.kt-tabs{display:flex;flex-wrap:wrap;gap:4px;margin:10px 0}
+.kt-ph{display:block;width:100%;aspect-ratio:16/9;border-radius:12px;background-size:cover;background-position:center}
+.kt-tabs{display:flex;flex-wrap:wrap;gap:4px;margin:16px 0 10px;position:relative;z-index:1}
 .kt-tabs button{width:30px;height:30px;border-radius:6px 6px 2px 2px;border:0;background:#d8c49a;color:#2a1d10;font-family:'Playfair Display',serif;font-weight:800}
 .kt-tabs button:disabled{opacity:.3}.kt-tabs button.on{background:#cfa863;transform:translateY(-3px)}
 .kt-box{display:flex;flex-direction:column;gap:0;perspective:600px}
@@ -585,7 +585,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .nz-p{width:90mm;background:#fffdf3;background-image:repeating-linear-gradient(0deg,transparent 0 7mm,rgba(70,110,170,.25) 7mm 7.3mm);padding:10mm 8mm 8mm;transform:rotate(-2deg);box-shadow:0 2mm 4mm rgba(0,0,0,.15);border:1px dashed #8a7a60;position:relative;font-family:'Caveat',cursive;font-size:19pt;color:#1d2a4a;line-height:7mm}
 .nz-p p{margin:0}.nz-p .s{font-size:14pt}
 .nz-tape{position:absolute;top:-4mm;left:30mm;width:30mm;height:8mm;background:rgba(230,220,180,.75);transform:rotate(3deg)}
-.dt.slim{font-size:12px;table-layout:fixed;width:100%}.dt.slim td,.dt.slim th{word-break:break-word;padding:4px 3px}.doc-v{overflow-x:auto}
+.dt.slim{font-size:12px;table-layout:auto;width:100%}.dt.slim td,.dt.slim th{word-break:normal;overflow-wrap:normal;hyphens:auto;-webkit-hyphens:auto;padding:4px 3px}.doc-v{overflow-x:auto}
 
 /* ===== Tag 14 bis 24 ===== */
 /* Handschrift Merkmale */
@@ -772,3 +772,4 @@ button{font:inherit;color:inherit;cursor:pointer}
 .doc-v.as td:first-child{font-weight:700;white-space:nowrap}
 
 .hw-w{white-space:nowrap}
+.dl-ic img{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block}

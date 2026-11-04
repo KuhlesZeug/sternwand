@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de"><head><meta charset="utf-8"><title>Druck</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Special+Elite&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=Special+Elite&family=Caveat:wght@500;700&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=Herr+Von+Muellerhoff&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=8"><link rel="stylesheet" href="brand.css?v=8">
 <style>
 @page{size:A4;margin:0}
 html,body{background:#fff;color:#20180f;margin:0}
@@ -18,17 +18,23 @@ html,body{background:#fff;color:#20180f;margin:0}
 .pg .tf-l{font-size:8pt}.pg .tf-l i{height:7mm}
 .cutline{border:1.5px dashed #7a6a50;border-radius:4mm;padding:4mm;display:inline-block}
 .pg-no{position:absolute;right:12mm;top:9mm;font-family:'Special Elite',monospace;font-size:13pt;background:#20180f;color:#f6efdf;border-radius:2mm;padding:1mm 3mm}
-.seal{border:1.5px dashed #7a6a50;height:22mm;margin:0 0 5mm;display:flex;align-items:center;background:repeating-linear-gradient(90deg,rgba(154,36,32,.08) 0 6mm,transparent 6mm 12mm)}
+.seal{border:1.5px dashed #7a6a50;height:15mm;margin:0 0 3mm;display:flex;align-items:center;background:repeating-linear-gradient(90deg,rgba(154,36,32,.08) 0 6mm,transparent 6mm 12mm)}
 .seal b{font-family:'Playfair Display',serif;font-size:18pt;padding:0 6mm;border-right:1.5px solid #9a2420;color:#9a2420}
 .seal span{font-family:'Special Elite',monospace;font-size:11pt;letter-spacing:.08em;text-transform:uppercase;padding:0 6mm;flex:1}
 .seal i{font-style:normal;font-size:9pt;color:#5a4a33;padding-right:6mm}
-.howto{font-size:11pt;line-height:1.6}.howto li{margin-bottom:2mm}
+.pg:last-child{page-break-after:auto;break-after:auto}
+.howto{font-size:11pt;line-height:1.6}
+.pg.pp-hotel{background:#f7f1e2 url(a/paper_hotel.jpg) center/cover}.pg.pp-office{background:#f1efe9 url(a/paper_amt.jpg) center/cover}
+.pg.pp-akte{background:linear-gradient(rgba(233,214,176,.55),rgba(222,200,158,.55)),url(a/paper_amt.jpg) center/cover}.pg.pp-thin{background:linear-gradient(rgba(240,236,226,.6),rgba(230,224,210,.6)),url(a/paper_amt.jpg) center/cover}
+.pg.br .pg-no{top:auto;bottom:8mm;right:12mm;font-size:10pt}.pg.br .pg-foot{bottom:4mm}.howto li{margin-bottom:2mm}
 </style></head><body>
 <div id="out"></div>
-<script src="docs.js?v=7"></script>
-<script src="docs2.js?v=7"></script>
-<script src="docs3.js?v=7"></script>
-<script src="docs4.js?v=7"></script>
+<script src="brand.js?v=8"></script>
+<script src="docs.js?v=8"></script>
+<script src="docs2.js?v=8"></script>
+<script src="docs3.js?v=8"></script>
+<script src="docs4.js?v=8"></script>
+<script src="docs5.js?v=8"></script>
 <script>
 const p=new URLSearchParams(location.search),R=(p.get('r')||'A').toUpperCase();
 const T=R==='A'?'Unterlagen vor Ort':'Fallakte Präsidium';
@@ -38,7 +44,8 @@ const foot=n=>'<div class="pg-foot"><span>© KuhlesZeug · nur für den privaten
 let pages=[];
 pages.push('<section class="pg"><div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>So bereitest du alles vor</b></div><ol class="howto"><li>Lies dieses Blatt, dann leg die Blätter '+L.filter(([k,d])=>!d.sealed).map(([k,d])=>d.no).join(', ')+' offen auf den Tisch.</li><li>Alle anderen Blätter einmal falten, Schrift nach innen. <b>Nicht lesen.</b></li><li>Schneide die Banderolen unten aus, leg jede um das Blatt mit derselben Nummer und klebe sie zusammen.</li><li>Leg die versiegelten Blätter auf einen Stapel neben dein Handy. Die App sagt dir, wann du welches öffnen darfst.</li></ol>'+
  seals.map(([k,d])=>'<div class="seal"><b>'+d.no+'</b><span>Versiegelt · erst öffnen, wenn die App es sagt</span><i>Zimmer 24</i></div>').join('')+foot(1)+'</section>');
-L.forEach(([k,d])=>pages.push('<section class="pg"><div class="pg-no">'+d.no+'</div><div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>'+d.title+'</b></div>'+(k==='ausweis'?'<div class="cutline">'+d.html('')+'</div><p class="dn">Ausschneiden und bereithalten. Trag deinen Namen ein und klebe ein Foto auf, wenn du magst.</p>':d.html(''))+foot(pages.length+1)+'</section>'));
+L.forEach(([k,d])=>{const br=!!d.org&&k!=='ausweis';const pp=br?(d.html('').match(/class="sheet pp-(\w+)/)||[])[1]:'';
+ pages.push('<section class="pg'+(br?' br':'')+(pp?' pp-'+pp:'')+'"><div class="pg-no">'+d.no+'</div>'+(br?'':'<div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>'+d.title+'</b></div>')+(k==='ausweis'?'<div class="cutline">'+d.html('',{print:1})+'</div><p class="dn">Ausschneiden, in der Mitte falten und zusammenkleben. Trag deinen Namen ein und klebe ein Foto auf. In der App kannst du an Tür 2 auch ein Selfie in deinen Ausweis einsetzen.</p>':d.html(''))+foot(pages.length+1)+'</section>')});
 document.getElementById('out').innerHTML=pages.join('');
 </script>
 </body></html>

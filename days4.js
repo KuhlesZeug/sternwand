@@ -2,14 +2,14 @@
 (function(){
 const X=TX4,CH=CH4;
 const HV=d=>({A:['a/h'+d+'a1.mp3?v=7','a/h'+d+'a2.mp3?v=7'],B:['a/h'+d+'b1.mp3?v=7','a/h'+d+'b2.mp3?v=7']});
-const V=(d,x)=>'a/vo_d'+d+x+'.mp3?v=7';
+const V=(d,x)=>'a/vo_d'+d+x+'.mp3?v=8';
 const C=k=>'a/'+k+'.mp3?v=7';
 const base=(d,o)=>Object.assign({hintVo:HV(d),hints:{A:X[d].hA,B:X[d].hB},reveal:{vo:V(d,'r'),text:X[d].r}},o);
 const LAB={t:'room',img:'a/b_labor.jpg',label:'Labor der Bergklinik',spots:[]};
 
 // Rückwege
-DAYS[1].A.mods.forEach(m=>{if(m.t==='room')m.spots.push({after:14,x:.30,y:.62,w:.26,h:.12,label:'Schlüsselbuch',open:{t:'doc',id:'schluesselbuch',cap:'Unter der Theke liegt das Schlüsselbuch für den Generalschlüssel. Der letzte Eintrag ist hastig, die Rückgabe fehlt.'}})});
-DAYS[3].A.mods.forEach(m=>{if(m.t==='room')m.spots.push({after:16,x:.64,y:.40,w:.34,h:.14,label:'Gewürzregal',open:{t:'text',cap:'Ganz hinten im Regal, hinter den Gläsern mit Majoran und Lorbeer, steht ein Glas mit getrockneten dunklen Blättern. Das Etikett ist abgekratzt. Ein Rest ist noch zu lesen: …hut. Daneben liegen Ilses Gartenhandschuhe.'}})});
+DAYS[1].A.mods.forEach(m=>{if(m.t==='room')m.spots.push({after:14,x:.30,y:.62,w:.26,h:.12,label:'Schlüsselbuch',open:{t:'doc',id:'generalbuch',cap:'Unter der Theke liegt das Schlüsselbuch für den Generalschlüssel. Der letzte Eintrag ist hastig, die Rückgabe fehlt.'}})});
+DAYS[3].A.mods.forEach(m=>{if(m.t==='room')m.spots.push({after:16,x:.64,y:.40,w:.34,h:.14,label:'Gewürzregal',open:{t:'text',cap:'Unten im Regal, direkt unter der Lücke, klebt ein abgerissener Etikettenrest am Holz. In Ilses Schrift steht noch: …hut, getr. Nov. Daneben liegen ihre Gartenhandschuhe, mit grünen Flecken an den Fingerspitzen.'}})});
 
 Object.assign(window.DAYS,{
 14:base(14,{room:'Zimmer 18',code:'7ea9ce8554b0d7778472a3da61063b70d1ebb1a6dc9fcd44f8a5bb145a19ee00',
@@ -18,8 +18,8 @@ Object.assign(window.DAYS,{
   {x:.00,y:.44,w:.22,h:.16,label:'Bautrockner',open:{t:'text',cap:'Die Bautrockner laufen seit Tagen. Der Wassertank des linken ist randvoll. Seit gestern Nacht hat ihn niemand geleert, aber jemand hat das Gerät verschoben, die Rollen haben Spuren im Staub gezogen.'}},
   {x:.55,y:.04,w:.40,h:.26,label:'Tapete',open:{t:'text',cap:'Unter der abgezogenen Tapete kommen Bleistiftstriche zum Vorschein, mit Jahreszahlen daneben. Jemand hat hier einmal ein Kind gemessen. Der letzte Strich ist von 1999.'}},
   {x:.00,y:.12,w:.26,h:.24,label:'Fenster',open:{t:'text',cap:'Das Fenster geht auf den Hof hinter der Küche. Unten im Schnee sieht man das Dach des kleinen Gewächshauses.'}}]}]},
- B:{vo:V(14,'b'),scene:X[14].b,mods:[{t:'room',img:'a/bank.jpg',label:'Raiffeisenbank Hochtal, nach Schalterschluss',spots:[
-  {x:.00,y:.36,w:.18,h:.16,label:'Terminal',open:{t:'pc',app:'bank',title:'Terminal · Raiffeisenbank Hochtal'}},
+ B:{vo:V(14,'b'),scene:X[14].b,mods:[{t:'room',img:'a/bank.jpg',label:'Bergbank Hochtal, nach Schalterschluss',spots:[
+  {x:.00,y:.36,w:.18,h:.16,label:'Terminal',open:{t:'pc',app:'bank',title:'Terminal · Bergbank Hochtal'}},
   {x:.68,y:.22,w:.18,h:.40,label:'Tresortür',open:{t:'text',cap:'Die schwere Tresortür steht einen Spalt offen. Darin Regale mit Geldkassetten, jede mit Nummer. Der Filialleiter hat gesagt: Bei uns geht kein Schein ohne Banderole raus.'}},
   {x:.30,y:.44,w:.30,h:.12,label:'Zettel',open:{t:'text',cap:'Auf dem Schalter ein Zettel in ordentlicher Schrift: Banderolen prüfen Sie unter Auskunft. Bitte nichts verändern. Gute Nacht, Huber.'}}]}]}}),
 
