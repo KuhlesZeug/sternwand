@@ -260,6 +260,6 @@
 .lp2-st.brk{animation:lpshake .4s}
 /* Titel mit Türschild */
 h1.t24{display:flex;align-items:center;justify-content:center;gap:.22em}
-h1.t24 img{height:1.15em;width:auto;filter:drop-shadow(0 .06em .12em rgba(0,0,0,.7));transform:rotate(-2deg)}
+h1.t24 img{height:1.2em;width:auto;filter:drop-shadow(0 .06em .14em rgba(0,0,0,.75));transform:rotate(-3deg)}
 .cover h1.t24{justify-content:flex-start}
 #s-start h1.t24{font-size:clamp(44px,13.5vw,80px)}
