@@ -189,4 +189,5 @@ PC_RENDER.blog=function(b){const key='blog_open';
 PC_APPS.bank={n:'Bankauskunft',im:'icon_bank',day:14};
 PC_APPS.blog={n:'Blog Spurenlage',im:'icon_notes',day:21};
 PC_APPS.lab.im='icon_lab2';
+window.__finEnd=finaleEnd;
 })();
