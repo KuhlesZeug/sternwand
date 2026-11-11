@@ -812,3 +812,9 @@ button{font:inherit;color:inherit;cursor:pointer}
  #rot-hint span{color:#a9b3bd;margin-top:6px;font-size:.95rem;font-family:Lora,serif}
 }
 @keyframes rot-h{0%,30%{transform:rotate(90deg)}60%,100%{transform:rotate(0)}}
+
+/* Nahaufnahme über Texttafeln */
+.note.has-nah{padding-top:0;overflow:hidden}
+.note .nah{margin:0 -16px 14px;aspect-ratio:4/3;background-repeat:no-repeat;background-color:#1a1410;position:relative;border-bottom:3px solid #b8935a}
+.note .nah i{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(10,6,2,.55) 100%)}
+@media(min-width:900px){.note .nah{aspect-ratio:16/9}}

@@ -27,6 +27,22 @@ html,body{background:#fff;color:#20180f;margin:0}
 .pg.pp-hotel{background:#f7f1e2 url(a/paper_hotel.jpg) center/cover}.pg.pp-office{background:#f1efe9 url(a/paper_amt.jpg) center/cover}
 .pg.pp-akte{background:linear-gradient(rgba(233,214,176,.55),rgba(222,200,158,.55)),url(a/paper_amt.jpg) center/cover}.pg.pp-thin{background:linear-gradient(rgba(240,236,226,.6),rgba(230,224,210,.6)),url(a/paper_amt.jpg) center/cover}
 .pg.br .pg-no{top:auto;bottom:13mm;right:12mm;font-size:10pt}.pg.br .pg-foot{bottom:7mm}.howto li{margin-bottom:2mm}
+/* Druck in jedem PDF Programm gleich: keine weichen Schatten, keine durchsichtigen Verläufe */
+.pg,.pg *{box-shadow:none!important;text-shadow:none!important}
+.pg{background-image:none}
+.pg *{filter:none!important}.pg .idc2-holo,.pg .idc2-g{display:none}.pg .vk-g{background:url(a/print_vkg.jpg) center/100% 100% no-repeat!important;opacity:1!important}.pg .ph8-g{background:url(a/print_ph8g.jpg) center/100% 100% no-repeat!important;opacity:1!important}.pg .seal-st,.pg .coffee{mix-blend-mode:normal}
+.pg.pp-hotel{background:#f7f1e2 url(a/paper_hotel.jpg) center/cover}.pg.pp-office{background:#f1efe9 url(a/paper_amt.jpg) center/cover}
+.pg.pp-akte{background:#e6d2a8 url(a/paper_akte_druck.jpg) center/cover}.pg.pp-thin{background:#ece6d8 url(a/paper_thin_druck.jpg) center/cover}
+.seal{background:repeating-linear-gradient(90deg,#f3e3d6 0 6mm,#f6efdf 6mm 12mm)}
+.tfoto{position:absolute;left:50%;bottom:24mm;margin:0;margin-left:calc(var(--w,0mm));background:#fdfcf8;border:.25mm solid #cfc6b2;padding:2.5mm 2.5mm 0;translate:-50% 0}
+.tfoto img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover}
+.tfoto figcaption{font-family:'Special Elite',monospace;font-size:9pt;color:#3a2e1e;padding:2mm 1mm 2.2mm;letter-spacing:.03em}
+.tfoto i{position:absolute;top:-4mm;left:50%;width:30mm;height:8mm;margin-left:-15mm;background:#e6dcb8;border:.2mm solid #d2c79c;transform:rotate(-2.5deg)}
+.pg.br .tfoto{bottom:30mm}
+.pg1{padding-top:0}.kopf{position:relative;margin:0 -15mm 8mm;height:74mm;overflow:hidden;background:#0b141c}.kopf img{width:100%;height:100%;object-fit:cover;display:block}
+.kopf-t{position:absolute;left:15mm;bottom:9mm;color:#f6efdf}.kopf-t span{display:block;font-family:'Special Elite',monospace;font-size:10pt;letter-spacing:.16em;text-transform:uppercase;color:#e7c98a}
+.kopf-t b{display:block;font-family:'Playfair Display',serif;font-size:40pt;line-height:1.05}.kopf-t i{font-family:'Playfair Display',serif;font-style:italic;font-size:14pt;color:#e7c98a}
+.pg1 .seal{height:11.5mm;margin-bottom:2mm}.pg1 .seal b{font-size:15pt}.pg1 .seal span{font-size:10pt}.pg1 .howto{font-size:10.5pt;line-height:1.45;margin:0 0 4mm}.pg1 .pg-top{margin-bottom:4mm}.pg1.many .kopf{height:52mm;margin-bottom:6mm}.pg1.many .kopf-t b{font-size:32pt}.pg1.many .seal{height:10.5mm;margin-bottom:1.7mm}
 </style></head><body>
 <div id="out"></div>
 <script src="brand.js?v=9"></script>
@@ -40,12 +56,17 @@ const p=new URLSearchParams(location.search),R=(p.get('r')||'A').toUpperCase();
 const T=R==='A'?'Unterlagen vor Ort':'Fallakte Präsidium';
 const L=Object.entries(DOCS).filter(([k,d])=>d.role===R&&d.no).sort((a,b)=>a[1].no.localeCompare(b[1].no,undefined,{numeric:true}));
 const seals=L.filter(([k,d])=>d.sealed);
+// Fotos vom Ort: gemalte Aufnahmen aus der App, nur Stimmung, keine Hinweise
+const FOTO={ausweis:['hotel.jpg','Berghotel Sternwand, 2.140 Meter. Seit gestern Abend eingeschneit.',150,'50% 30%'],lageplan:['rezeption.jpg','Die Rezeption. Hier fängt alles an.',118,'50% 62%'],visitenkarte:['zimmer7.jpg','Zimmer 7, erster Stock',150,'50% 55%'],kamerazettel:['kameraraum.jpg','Der Kameraraum im Keller',150,'50% 45%'],
+ foto_rueck:['zimmer3.jpg','Zimmer 3 im Personaltrakt',122,'50% 40%'],verhoer:['verhoer.jpg','Der Verhörraum. Zwei Stühle, eine Lampe.',112,'50% 50%'],
+ deckblatt:['pb_buero.jpg','Büro K1, Polizeipräsidium Hochtal',88,'50% 55%'],heirat:['standesamt.jpg','Archiv im Standesamt Hochtal',66,'50% 50%'],wartung:['videoraum.jpg','Videoraum im Präsidium',146,'50% 50%'],telefonliste:['zentrale_b.jpg','Zentrale des Präsidiums',100,'50% 50%']};
+const fotoH=k=>{const f=FOTO[k];if(!f)return '';return '<figure class="tfoto" style="width:'+f[2]+'mm;transform:rotate('+((k.length%2?-1:1)*1.2)+'deg)"><i></i><img src="a/'+f[0]+'" style="object-position:'+f[3]+'" alt=""><figcaption>'+f[1]+'</figcaption></figure>'};
 const foot=n=>'<div class="pg-foot"><span>© KuhlesZeug · nur für den privaten Gebrauch · frei erfundene Geschichte</span><span>Rolle '+R+' · Seite '+n+'</span></div>';
 let pages=[];
-pages.push('<section class="pg"><div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>So bereitest du alles vor</b></div><ol class="howto"><li>Lies dieses Blatt, dann leg die Blätter '+L.filter(([k,d])=>!d.sealed).map(([k,d])=>d.no).join(', ')+' offen auf den Tisch.</li><li>Alle anderen Blätter einmal falten, Schrift nach innen. <b>Nicht lesen.</b> Am besten bereitet ihr die Stapel gegenseitig vor: Jeder faltet die Blätter des anderen.</li><li>Schneide die Banderolen unten aus. Leg jede quer über das Blatt mit derselben Nummer und klebe die Enden hinten fest.</li><li>Leg die versiegelten Blätter auf einen Stapel neben dein Handy. Die App sagt dir, wann du welches öffnen darfst.</li></ol>'+
+pages.push('<section class="pg pg1'+(L.filter(([k,d])=>d.sealed).length>9?' many':'')+'"><div class="kopf"><img src="a/print_kopf_'+R+'.jpg" alt=""><div class="kopf-t"><span>Ein Krimi Adventskalender für zwei</span><b>Zimmer 24</b><i>'+T+' · Rolle '+R+'</i></div></div><div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>So bereitest du alles vor</b></div><ol class="howto"><li>Lies dieses Blatt, dann leg die Blätter '+L.filter(([k,d])=>!d.sealed).map(([k,d])=>d.no).join(', ')+' offen auf den Tisch.</li><li>Alle anderen Blätter einmal falten, Schrift nach innen. <b>Nicht lesen.</b> Am besten bereitet ihr die Stapel gegenseitig vor: Jeder faltet die Blätter des anderen.</li><li>Schneide die Banderolen unten aus. Leg jede quer über das Blatt mit derselben Nummer und klebe die Enden hinten fest.</li><li>Leg die versiegelten Blätter auf einen Stapel neben dein Handy. Die App sagt dir, wann du welches öffnen darfst.</li></ol>'+
  seals.map(([k,d])=>'<div class="seal"><b>'+d.no+'</b><span>Versiegelt · erst öffnen, wenn die App es sagt</span><i>Zimmer 24</i></div>').join('')+foot(1)+'</section>');
 L.forEach(([k,d])=>{const br=!!d.org&&k!=='ausweis';const pp=br?(d.html('').match(/class="sheet pp-(\w+)/)||[])[1]:'';
- pages.push('<section class="pg'+(br?' br':'')+(pp?' pp-'+pp:'')+'"><div class="pg-no">'+d.no+'</div>'+(br?'':'<div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>'+d.title+'</b></div>')+(k==='ausweis'?'<div class="cutline">'+d.html('',{print:1})+'</div><p class="dn">Ausschneiden, in der Mitte falten und zusammenkleben. Trag deinen Namen ein und klebe ein Foto auf. In der App kannst du an Tür 2 auch ein Selfie in deinen Ausweis einsetzen.</p>':d.html(''))+foot(pages.length+1)+'</section>')});
+ pages.push('<section class="pg'+(br?' br':'')+(pp?' pp-'+pp:'')+'"><div class="pg-no">'+d.no+'</div>'+(br?'':'<div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>'+d.title+'</b></div>')+(k==='ausweis'?'<div class="cutline">'+d.html('',{print:1})+'</div><p class="dn">Ausschneiden, in der Mitte falten und zusammenkleben. Trag deinen Namen ein und klebe ein Foto auf. In der App kannst du an Tür 2 auch ein Selfie in deinen Ausweis einsetzen.</p>':d.html(''))+fotoH(k)+foot(pages.length+1)+'</section>')});
 document.getElementById('out').innerHTML=pages.join('');
 </script>
 </body></html>

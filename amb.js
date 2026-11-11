@@ -70,5 +70,7 @@ A.sfx={
  creak(){const t=C.currentTime,o=C.createOscillator(),g=C.createGain(),fl=C.createBiquadFilter();o.type='sawtooth';o.frequency.setValueAtTime(110,t);o.frequency.linearRampToValueAtTime(160,t+.6);fl.type='bandpass';fl.frequency.value=700;fl.Q.value=6;o.connect(fl);fl.connect(g);g.connect(out);env(g,t,.1,.03,.6);o.start(t);o.stop(t+.8)}
 };
 let duckLvl=1,baseLvl=.5;const _m=A.music;A.music=function(on,l){if(l!=null)baseLvl=l;return _m(on,l!=null?l*duckLvl:l)};A.duck=function(on){duckLvl=on?.35:1;if(mus&&C)mus.g.gain.setTargetAtTime(baseLvl*duckLvl,C.currentTime,.3);if(cur&&C)cur.g.gain.setTargetAtTime(on?.9:1.8,C.currentTime,.3)};
+// Geräusche dürfen nie einen Klick blockieren, auch nicht bei ausgeschaltetem Ton
+Object.keys(A.sfx).forEach(k=>{const f=A.sfx[k];A.sfx[k]=function(){try{if(!ctx())return;return f.apply(A.sfx,arguments)}catch(e){}}});
 window.AMBI=A;
 })();
