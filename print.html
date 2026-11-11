@@ -26,7 +26,7 @@ html,body{background:#fff;color:#20180f;margin:0}
 .howto{font-size:11pt;line-height:1.6}
 .pg.pp-hotel{background:#f7f1e2 url(a/paper_hotel.jpg) center/cover}.pg.pp-office{background:#f1efe9 url(a/paper_amt.jpg) center/cover}
 .pg.pp-akte{background:linear-gradient(rgba(233,214,176,.55),rgba(222,200,158,.55)),url(a/paper_amt.jpg) center/cover}.pg.pp-thin{background:linear-gradient(rgba(240,236,226,.6),rgba(230,224,210,.6)),url(a/paper_amt.jpg) center/cover}
-.pg.br .pg-no{top:auto;bottom:8mm;right:12mm;font-size:10pt}.pg.br .pg-foot{bottom:4mm}.howto li{margin-bottom:2mm}
+.pg.br .pg-no{top:auto;bottom:13mm;right:12mm;font-size:10pt}.pg.br .pg-foot{bottom:7mm}.howto li{margin-bottom:2mm}
 </style></head><body>
 <div id="out"></div>
 <script src="brand.js?v=9"></script>
@@ -42,7 +42,7 @@ const L=Object.entries(DOCS).filter(([k,d])=>d.role===R&&d.no).sort((a,b)=>a[1].
 const seals=L.filter(([k,d])=>d.sealed);
 const foot=n=>'<div class="pg-foot"><span>© KuhlesZeug · nur für den privaten Gebrauch · frei erfundene Geschichte</span><span>Rolle '+R+' · Seite '+n+'</span></div>';
 let pages=[];
-pages.push('<section class="pg"><div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>So bereitest du alles vor</b></div><ol class="howto"><li>Lies dieses Blatt, dann leg die Blätter '+L.filter(([k,d])=>!d.sealed).map(([k,d])=>d.no).join(', ')+' offen auf den Tisch.</li><li>Alle anderen Blätter einmal falten, Schrift nach innen. <b>Nicht lesen.</b></li><li>Schneide die Banderolen unten aus, leg jede um das Blatt mit derselben Nummer und klebe sie zusammen.</li><li>Leg die versiegelten Blätter auf einen Stapel neben dein Handy. Die App sagt dir, wann du welches öffnen darfst.</li></ol>'+
+pages.push('<section class="pg"><div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>So bereitest du alles vor</b></div><ol class="howto"><li>Lies dieses Blatt, dann leg die Blätter '+L.filter(([k,d])=>!d.sealed).map(([k,d])=>d.no).join(', ')+' offen auf den Tisch.</li><li>Alle anderen Blätter einmal falten, Schrift nach innen. <b>Nicht lesen.</b> Am besten bereitet ihr die Stapel gegenseitig vor: Jeder faltet die Blätter des anderen.</li><li>Schneide die Banderolen unten aus. Leg jede quer über das Blatt mit derselben Nummer und klebe die Enden hinten fest.</li><li>Leg die versiegelten Blätter auf einen Stapel neben dein Handy. Die App sagt dir, wann du welches öffnen darfst.</li></ol>'+
  seals.map(([k,d])=>'<div class="seal"><b>'+d.no+'</b><span>Versiegelt · erst öffnen, wenn die App es sagt</span><i>Zimmer 24</i></div>').join('')+foot(1)+'</section>');
 L.forEach(([k,d])=>{const br=!!d.org&&k!=='ausweis';const pp=br?(d.html('').match(/class="sheet pp-(\w+)/)||[])[1]:'';
  pages.push('<section class="pg'+(br?' br':'')+(pp?' pp-'+pp:'')+'"><div class="pg-no">'+d.no+'</div>'+(br?'':'<div class="pg-top"><span>Zimmer 24 · '+T+'</span><b>'+d.title+'</b></div>')+(k==='ausweis'?'<div class="cutline">'+d.html('',{print:1})+'</div><p class="dn">Ausschneiden, in der Mitte falten und zusammenkleben. Trag deinen Namen ein und klebe ein Foto auf. In der App kannst du an Tür 2 auch ein Selfie in deinen Ausweis einsetzen.</p>':d.html(''))+foot(pages.length+1)+'</section>')});

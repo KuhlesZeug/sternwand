@@ -19,9 +19,9 @@ const O={
  gruber:{mark:'SG',top:'seit 1974',n:'Sport Gruber',sub:'Verleih · Service · Bergsport',
   adr:['Talstraße 40','6731 Hochtal','Filiale im Berghotel Sternwand','Telefon 2290'],
   ft:'Sport Gruber · Inhaber Anton Gruber · Talstraße 40 · 6731 Hochtal'},
- notar:{mark:'K',top:'Öffentliche Notarin',n:'Dr. Johanna Kessler',sub:'Notariat Hochtal',
+ notar:{mark:'K',top:'Öffentlicher Notar',n:'Dr. Johannes Kessler',sub:'Notariat Hochtal',
   adr:['Kirchgasse 2','6731 Hochtal','Telefon 2650','Telefax 2651'],
-  ft:'Notariat Dr. Johanna Kessler · Kirchgasse 2 · 6731 Hochtal · Termine nach Vereinbarung'},
+  ft:'Notariat Dr. Johannes Kessler · Kirchgasse 2 · 6731 Hochtal · Termine nach Vereinbarung'},
  bergschule:{mark:'BS',top:'staatlich geprüfte Berg und Skiführer',n:'Bergschule Sternwand',sub:'im Berghotel Sternwand',
   adr:['Hochtal 1','6731 Hochtal'],ft:'Bergschule Sternwand · Leitung Tom Riedl'}
 };

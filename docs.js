@@ -51,7 +51,7 @@ window.DOCS={
    ['27.11.','18','Fa. Moser, Installateur','8:00','16:30']
   ])+
   '<p class="hw">Familie Wendt (12, 23, 24) hat ihre Schlüssel dauerhaft bei sich und trägt sich nicht ein.</p>'+
-  '<div class="note" style="margin-top:12px"><div class="sl-h">Zettel am Buch</div><p class="hw">Zimmer 18 bleibt zu, bis alles trocken ist! Schlüssel hängt am Brett und wird an NIEMANDEN rausgegeben. Nur ich oder Fa. Moser. A. Gruber, 27.11.</p></div>'},
+  '<div class="note" style="margin-top:12px"><div class="sl-h">Zettel am Buch</div><p class="hw">Zimmer 18 bleibt zu, bis alles trocken ist! Schlüssel hängt am Brett und wird an NIEMANDEN rausgegeben. Nur ich oder Fa. Moser. S. Gruber, 27.11.</p></div>'},
 
  dienst_kueche:{role:'B',day:3,no:'B5',sealed:1,tab:'Dienstplan',title:'Dienstplan Küche und Service',html:()=>
   hd('Berghotel Sternwand · Personal','Dienstplan Küche und Service','Woche 48 und 49')+
@@ -102,7 +102,7 @@ window.DOCS={
   '<div class="note slip"><div class="sl-h">Bergschule Sternwand</div><div class="sl-s">Ausrüstung Bergführer · T. Riedl</div>'+
   tab(['Gegenstand','Inventarnummer'],[
    ['Eispickel','ES 4471'],['Steigeisen','ES 4472'],['Lawinenschaufel','ES 4475'],['Lawinensonde','ES 4478'],['Lawinenpiepser','ES 4479'],['Seil 60 m','ES 4483']
-  ],'slim')+'<div class="sl-f">Jährliche Prüfung: 10.10. · A. Gruber</div></div>'},
+  ],'slim')+'<div class="sl-f">Jährliche Prüfung: 10.10. · R. Mair</div></div>'},
  tourenbuch:{html:()=>
   '<div class="note"><div class="sl-h">Tourenbuch</div><p class="hw">Mi 25.11. · Sternwandgrat mit 2 Gästen · 6:30 bis 15:10</p><p class="hw">Do 26.11. · Sturmwarnung, keine Touren</p><p class="hw">Fr 27.11. · abgesagt</p><p class="hw">ab Sa · Lawinenwarnstufe 4, alles gesperrt</p></div>'},
  gaestebuch:{html:()=>

@@ -21,14 +21,14 @@ Object.assign(window.DAYS,{
  B:{vo:V(14,'b'),scene:X[14].b,mods:[{t:'room',img:'a/bank.jpg',label:'Bergbank Hochtal, nach Schalterschluss',spots:[
   {x:.00,y:.36,w:.18,h:.16,label:'Terminal',open:{t:'pc',app:'bank',title:'Terminal · Bergbank Hochtal'}},
   {x:.68,y:.22,w:.18,h:.40,label:'Tresortür',open:{t:'text',cap:'Die schwere Tresortür steht einen Spalt offen. Darin Regale mit Geldkassetten, jede mit Nummer. Der Filialleiter hat gesagt: Bei uns geht kein Schein ohne Banderole raus.'}},
-  {x:.30,y:.44,w:.30,h:.12,label:'Zettel',open:{t:'text',cap:'Auf dem Schalter ein Zettel in ordentlicher Schrift: Banderolen prüfen Sie unter Auskunft. Bitte nichts verändern. Gute Nacht, Huber.'}}]}]}}),
+  {x:.30,y:.44,w:.30,h:.12,label:'Zettel',open:{t:'text',cap:'Auf dem Schalter ein Zettel in ordentlicher Schrift: Banderolen prüfen Sie unter Auskunft. Bitte nichts verändern. Gute Nacht, Kofler.'}}]}]}}),
 
 15:base(15,{room:'Suite 24',code:'822edd9154b87c9bd37aeeaddf011c222d6dbbf5e37eddbc3e9d319620f50d6c',
  A:{vo:V(15,'a'),scene:X[15].a,mods:[{t:'gallery',label:'Tatortfotos auf deinem Handy',note:'Vier Fotos vom ersten Morgen',start:0,items:[
-   {img:'a/tat_sessel.jpg',t:'07:02',cap:'Der Sessel am Fenster. Die Decke ist heruntergerutscht, die Lesebrille liegt auf dem Teppich. Am Kopfteil ein kleiner, dunkler Fleck. Erstaunlich wenig Blut.'},
-   {img:'a/tat_pickel.jpg',t:'07:04',cap:'Der Eispickel neben dem Sessel. Am Schaft eingebrannt die Initialen T. R.'},
-   {img:'a/tat_safe.jpg',t:'07:06',cap:'Der Safe in der Wandverkleidung steht offen. Bis auf ein paar Papiere ist er leer.'},
-   {img:'a/thermo.jpg',t:'07:10',cap:'Das Fieberthermometer aus der Hausapotheke, nach der Messung unter dem Arm. Du hast das Foto direkt danach gemacht.',ov:'<div class="th-lcd"><span>°C</span><b>29,3</b></div><div class="th-tag">Messung 07:10</div>'}]},
+   {img:'a/tat_sessel.jpg',t:'07:12',cap:'Der Sessel am Fenster. Die Decke ist heruntergerutscht, die Lesebrille liegt auf dem Teppich. Am Kopfteil ein kleiner, dunkler Fleck. Erstaunlich wenig Blut.'},
+   {img:'a/tat_pickel.jpg',t:'07:14',cap:'Der Eispickel neben dem Sessel. Am Schaft eingebrannt die Initialen T. R.'},
+   {img:'a/tat_safe.jpg',t:'07:16',cap:'Der Safe in der Wandverkleidung steht offen. Bis auf ein paar Papiere ist er leer.'},
+   {img:'a/thermo.jpg',t:'07:20',cap:'Das Fieberthermometer aus der Hausapotheke, nach der Messung unter dem Arm. Du hast das Foto direkt danach gemacht.',ov:'<div class="th-lcd"><span>°C</span><b>29,3</b></div><div class="th-tag">Messung 07:20</div>'}]},
   {t:'room',img:'a/suite24.jpg',label:'Suite 24, durch die versiegelte Tür',spots:[
    {x:.30,y:.40,w:.30,h:.30,label:'Sessel',open:{t:'tatort',start:0,items:null}},
    {x:.00,y:.35,w:.24,h:.32,label:'Kamin',open:{t:'text',cap:'Im Kamin nur noch kalte Asche. In der Nacht hat es niemand nachgelegt.'}},
@@ -80,7 +80,7 @@ Object.assign(window.DAYS,{
   {x:.00,y:.80,w:.40,h:.18,label:'Kirchenbank',open:{t:'text',cap:'In der ersten Bank liegt ein Gesangbuch. Vorne steht mit Kinderschrift ein Name: Lena. Und darunter, später dazugeschrieben, ein Kreuz.'}}]}]},
  B:{vo:V(19,'b'),scene:X[19].b,mods:[{t:'room',img:'a/besprechung.jpg',label:'Besprechungsraum',spots:[
   {x:.05,y:.55,w:.85,h:.25,label:'Personalakten',open:{t:'env',id:'personalakten',cap:'Fünf Personalbögen, frisch aus dem Fax, noch warm. Jeder mit demselben Satz in einer anderen Handschrift.'}},
-  {x:.00,y:.04,w:.36,h:.32,label:'Whiteboard',open:{t:'text',cap:'Auf dem Whiteboard steht noch die Zeitleiste von gestern: 22:31 Tee, 22:50 leere Tasse, 23:30 Tod, 23:40 Strom weg, 0:05 Anruf, 0:15 Jonas.'}}]}]}}),
+  {x:.00,y:.04,w:.36,h:.32,label:'Whiteboard',open:{t:'text',cap:'Auf dem Whiteboard steht noch die Zeitleiste von gestern: 22:31 Tee, 22:50 leere Tasse, 23:30 Tod, 23:40 Strom weg, 0:05 Anruf. Dahinter ein dickes Fragezeichen: Wer war nach Mitternacht noch im Zimmer?'}}]}]}}),
 
 20:base(20,{room:'Suite 24',code:'78252129932f2070d2ba9fe43e14183adbc844b75c697a0676bb18e2bd2f2a62',
  A:{vo:V(20,'a'),scene:X[20].a,mods:[{t:'room',img:'a/suite_bad.jpg',label:'Badezimmer der Suite',spots:[

@@ -16,7 +16,7 @@ const RD={A:'Du ermittelst vor Ort im eingeschneiten Hotel',B:'Du ermittelst im 
 // Testmodus
 let PROBE=false;const ready=(async()=>{const q=params.get('probe');if(q&&await kzSha(q)==='747d0d509e349f606cddf94e726f2ec3667112646ac24b6fcdba8903e754d750')PROBE=true})();
 function berlin(){const p=new Intl.DateTimeFormat('de-DE',{timeZone:'Europe/Berlin',year:'numeric',month:'numeric',day:'numeric'}).formatToParts(new Date());const o={};p.forEach(x=>o[x.type]=+x.value);return o}
-function unlocked(d){if(PROBE)return true;const b=berlin();if(b.month===12)return b.day>=d;if(b.month===1)return true;return false}
+function unlocked(d){if(PROBE)return true;const b=berlin();if(b.month===12)return b.day>=d;if(b.month===1||b.month===2)return true;return false}
 function maxDay(){let m=0;for(let d=1;d<=24;d++)if(unlocked(d)&&DAYS[d])m=d;return m}
 
 // Ton
@@ -95,7 +95,7 @@ function goKit(){const K=KIT[ROLE];$('#kit-kick').textContent=RN[ROLE];$('#kit-t
  const row=(n,t,i,key)=>{const li=el('li','','<span class="n">'+n+'</span><span><b>'+t+'</b><i>'+i+'</i></span>');const b=el('button','kit-chk'+(st.kit[key]?' on':''),st.kit[key]?KI.check:'');b.setAttribute('aria-label','erledigt');b.onclick=()=>{SFX.tap();st.kit[key]=!st.kit[key];save();b.classList.toggle('on',!!st.kit[key]);b.innerHTML=st.kit[key]?KI.check:''};li.appendChild(b);return li};
  ul.appendChild(el('li','kit-sep','Offen bereitlegen'));K.open.forEach(id=>ul.appendChild(row(DOCS[id].no,DOCS[id].title,K.tips[id]||'',id)));
  const seal=all.filter(([id,d])=>d.sealed);ul.appendChild(el('li','kit-sep','Versiegeln, nicht hineinschauen'));
- ul.appendChild(row(seal.map(([id,d])=>d.no).join(', '),seal.length+' Umschläge','Falten, Banderole mit der passenden Nummer herumkleben, beiseitelegen.','seal'));
+ ul.appendChild(row(seal.map(([id,d])=>d.no).join(', '),seal.length+' Umschläge','Falten, Banderole mit der passenden Nummer quer darüberlegen, Enden hinten festkleben, beiseitelegen.','seal'));
  c.appendChild(ul);c.appendChild(el('p','pp-note',K.mat));k.appendChild(c);
  const f=el('div','kit-foot');const go=el('button','btn big','Alles liegt bereit');go.onclick=()=>{ac();SFX.door();st.kit.ok=1;save();goDesk()};f.appendChild(go);
  const again=el('button','btn ghost sm desk-film','Intro noch einmal ansehen');again.onclick=()=>{st.intro=0;save();goIntro()};f.appendChild(again);k.appendChild(f);show('#s-kit')}
