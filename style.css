@@ -818,3 +818,22 @@ button{font:inherit;color:inherit;cursor:pointer}
 .note .nah{margin:0 -16px 14px;aspect-ratio:4/3;background-repeat:no-repeat;background-color:#1a1410;position:relative;border-bottom:3px solid #b8935a}
 .note .nah i{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(10,6,2,.55) 100%)}
 @media(min-width:900px){.note .nah{aspect-ratio:16/9}}
+
+/* Lesbarkeit am Handy (11.11.2026): Kleingedrucktes in nachgebildeten Dokumenten nur in der App etwas größer, Druck bleibt unverändert */
+#v-body .lh-mark.xs,#v-body .lh-refs span,#v-body .lh-ft,#v-body .ak-st{font-size:10.5px}
+#v-body .lh-n small,#v-body .sig-n,#v-body .cv2-g span,#v-body .cv2-r span,#v-body .cv2-i span,#v-body .urk2-h small,#v-body .vk10-k,#v-body .bn-f{font-size:11px}
+#v-body .lh-a,#v-body .box-st b,#v-body .fxh,#v-body .cv2-bc,#v-body .urk2-no,#v-body .tf-p,#v-body .gt-lk,#v-body .hk-lab,#v-body .tf-l,#v-body .ps-h,#v-body .bk-f,#v-body .bg-seal{font-size:11px}
+#v-body .bk-f{opacity:.75}
+#v-body small{font-size:max(.85em,10.5px)}
+#v-body .vk-a,#v-body .rp-st{font-size:11px}
+/* schmale Handys (iPhone SE): nichts ragt aus dem Blatt */
+#v-body .urk-t{font-size:clamp(22px,8.6vw,40px)}
+#v-body .urk .sig{font-size:min(42px,11vw);max-width:100%}
+#v-body .sig-b,#v-body .sig-l,#v-body .sig-n{max-width:100%}
+#v-body .sp-row{margin-left:0}
+#v-body .sp-sw{width:5mm}
+#v-body .slipw,#v-body .nz-p{max-width:100%;box-sizing:border-box}
+@media (max-width:420px){#v-body .urk2-in{padding:16px 12px}#v-body .urk2-f{flex-wrap:wrap;justify-content:center;row-gap:12px}}
+#v-body .fx .sp,#v-body .fx .sp b,#v-body .fx .sp span{color:#16181c}
+@media (max-width:420px){#v-body .sp-row{grid-template-columns:repeat(4,1fr);row-gap:14px}#v-body .sp-f{padding-top:4mm}#v-body .sp-f span{font-size:11.5px;line-height:1.2;padding:0 2px}}
+@media (max-width:360px){.ps-t{font-size:12px}.bg-lab{font-size:11.5px;padding:8px 9px}}
