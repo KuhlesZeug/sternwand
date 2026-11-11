@@ -14,7 +14,7 @@ const T=t=>String(t||'').replace(/\{N\}/g,esc(st.me)||'du').replace(/\{P\}/g,esc
 const RD={A:'Du ermittelst vor Ort im eingeschneiten Hotel',B:'Du ermittelst im Präsidium im Tal'};
 
 // Testmodus
-let PROBE=false;const ready=(async()=>{const q=params.get('probe');if(q&&await kzSha(q)==='747d0d509e349f606cddf94e726f2ec3667112646ac24b6fcdba8903e754d750')PROBE=true})();
+let PROBE=false;const ready=(async()=>{const q=params.get('probe');if(q&&['747d0d509e349f606cddf94e726f2ec3667112646ac24b6fcdba8903e754d750','db9895336cf3d8e262f67463d3a8a6cdb4733130c1fe1f00c83d8ed6b4106e1c'].includes(await kzSha(q)))PROBE=true})();
 function berlin(){const p=new Intl.DateTimeFormat('de-DE',{timeZone:'Europe/Berlin',year:'numeric',month:'numeric',day:'numeric'}).formatToParts(new Date());const o={};p.forEach(x=>o[x.type]=+x.value);return o}
 function unlocked(d){if(PROBE)return true;const b=berlin();if(b.month===12)return b.day>=d;if(b.month===1||b.month===2)return true;return false}
 function maxDay(){let m=0;for(let d=1;d<=24;d++)if(unlocked(d)&&DAYS[d])m=d;return m}
