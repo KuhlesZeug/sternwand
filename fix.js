@@ -37,3 +37,36 @@ window.openSpot=function(s){const o=s.open;if(o&&(o.t==='text'||o.t==='env')&&!(
  return _open(s)};
 try{openSpot=window.openSpot}catch(e){}
 })();
+
+// Testmappe (nur im Testlink): alle Papierblätter beider Rollen direkt in der App ansehen, ohne Ausdruck
+(function(){
+const P=()=>{try{return PROBE}catch(e){return false}};
+const sortNo=(a,b)=>a[1].no.localeCompare(b[1].no,undefined,{numeric:true});
+const pv=id=>{const d=DOCS[id];if(!d||!d.html)return;try{SFX.paper()}catch(e){}
+ viewer('<p class="v-cap top">'+(d.no?'Blatt '+d.no+' · ':'')+'Testansicht des Papierblatts <button class="pv-zoom" type="button">Vergrößern</button></p><div class="pv-fit"><div class="pv-sheet">'+d.html()+'</div></div>');
+ requestAnimationFrame(()=>{const f=document.querySelector('#v-body .pv-fit'),sh=f&&f.firstChild,z=document.querySelector('#v-body .pv-zoom');if(!sh)return;
+  const meas=()=>{const L=sh.getBoundingClientRect().left;let R=0;sh.querySelectorAll('*').forEach(e=>{const q=e.getBoundingClientRect();if(q.width>0)R=Math.max(R,q.right-L)});return Math.ceil(Math.max(R,sh.scrollWidth))};
+  const fit=()=>{sh.style.transform='';sh.style.width='';f.style.height='';const W=f.clientWidth;let N=meas();if(N>W+1)N=Math.max(N,720);for(let i=0;i<4&&N>W+1;i++){sh.style.width=N+'px';const M=meas();if(M<=N+1)break;N=M}if(N>W+1){sh.style.width=N+'px';const L=sh.getBoundingClientRect().left;let a=1e9,R=0;[...sh.children].forEach(c=>[c,...c.querySelectorAll('*')].forEach(e=>{const q=e.getBoundingClientRect();if(q.width>0&&q.height>0){a=Math.min(a,q.left-L);R=Math.max(R,q.right-L)}}));if(a>1e8)a=0;const C=Math.max(R-a,10),k=Math.min(1,W/C);sh.style.transform='scale('+k+') translateX('+(-a)+'px)';f.style.height=sh.scrollHeight*k+'px';z.style.display=''}else z.style.display='none'};
+  fit();z.onclick=()=>{const on=f.classList.toggle('big');z.textContent=on?'Ganzes Blatt':'Vergrößern';if(on){sh.style.transform='';f.style.height=''}else fit()}})};
+window.pvDoc=pv;
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-pdoc]');if(!b||!P())return;e.preventDefault();e.stopPropagation();pv(b.dataset.pdoc)},true);
+const btn=id=>DOCS[id]?'<button class="btn sm pv-doc" data-pdoc="'+id+'">'+DOCS[id].no+' ansehen: '+DOCS[id].title+'</button>':'';
+// Umschläge, die die App öffnen lässt
+const _env=window.envOpen;if(_env){window.envOpen=function(ids){const h=_env(ids);return P()?h+'<div class="pv-row">'+ids.map(btn).join('')+'</div>':h}}
+// Papierliste im Tag
+if(typeof MODS!=='undefined'&&MODS.paper){const _p=MODS.paper;MODS.paper=function(x){const w=_p(x);if(P())w.querySelectorAll('.pp-it').forEach((it,i)=>{const id=x.items[i];if(id){it.dataset.pdoc=id;it.classList.add('pv-it')}});return w}}
+// Umschlag Stellen im Raum
+const _os=window.openSpot;window.openSpot=function(s){const r=_os(s);try{if(P()&&s&&s.open&&s.open.t==='env'&&DOCS[s.open.id]){const vb=document.querySelector('#v-body');if(vb)vb.insertAdjacentHTML('beforeend','<div class="pv-row">'+btn(s.open.id)+'</div>')}}catch(e){}return r};
+try{openSpot=window.openSpot}catch(e){}
+// Knopf auf dem Schreibtisch
+function mappe(){const all=Object.entries(DOCS).filter(([id,d])=>d&&d.no&&d.html);
+ const grp=(r,t)=>'<div class="pv-grp"><div class="kick">'+t+'</div>'+all.filter(([id,d])=>d.role===r).sort(sortNo).map(([id,d])=>'<button class="pv-li" data-pdoc="'+id+'"><b>'+d.no+'</b><span>'+d.title+(d.sealed?'<i>Umschlag, Tag '+d.day+'</i>':'<i>offen von Anfang an</i>')+'</span></button>').join('')+'</div>';
+ viewer('<div class="pv-mappe"><p class="v-cap top">Testmappe: alle Papierblätter, wie sie im PDF liegen. Diese Ansicht gibt es nur im Testlink.</p>'+grp(ROLE,ROLE==='B'?'Deine Fallakte (B)':'Deine Unterlagen (A)')+grp(ROLE==='B'?'A':'B',ROLE==='B'?'Unterlagen des Partners vor Ort (A)':'Fallakte des Partners im Präsidium (B)')+'</div>')}
+const _rd=window.renderDesk;window.renderDesk=function(){_rd.apply(this,arguments);if(!P())return;const f=document.querySelector('#deskfoot');if(f&&!f.querySelector('#btn-pmappe')){const b=document.createElement('button');b.className='btn ghost sm desk-film';b.id='btn-pmappe';b.textContent='Testmappe: alle Papierblätter';b.onclick=()=>{try{ac()}catch(e){}mappe()};f.appendChild(b)}};
+try{renderDesk=window.renderDesk}catch(e){}
+})();
+
+// Ende des Intros: Übergang zur Akte
+(function(){const _fe=window.filmEnd;if(!_fe)return;window.filmEnd=function(){_fe.apply(this,arguments);const t=document.querySelector('#film-end-t'),b=document.querySelector('#btn-film-go');let kitOk=false;try{kitOk=!!(st.kit&&st.kit.ok)}catch(e){}
+ if(t)t.innerHTML=(ROLE==='B'?'Das Präsidium wartet auf dich. Bevor du loslegst, leg deine ausgedruckte Fallakte bereit.':'Das Berghotel wartet auf dich. Bevor du loslegst, leg deine ausgedruckten Unterlagen bereit.')+'<span class="fe-sm">Die verschlossenen Umschläge bleiben zu, bis die App dich bittet, einen zu öffnen.</span>';
+ if(b&&!kitOk)b.textContent=ROLE==='B'?'Fallakte vorbereiten':'Unterlagen vorbereiten'};try{filmEnd=window.filmEnd}catch(e){}})();
